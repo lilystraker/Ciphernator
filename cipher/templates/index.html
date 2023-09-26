@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>S-DES Encrypter</h1>
+<p>Please enter a 10-bit key and 8-bit plaintext to begin</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<h1>Results</h1>
+<h2>K1</h2>
+<p>{{ k1 }}</p>
+
+<h2>K2</h2>
+<p>{{ k2 }}</p>
+
+</body>
+</html>
