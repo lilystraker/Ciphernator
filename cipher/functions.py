@@ -170,7 +170,34 @@ def sdesEncryption(plaintext, keys):
 
     s1_result = s_matrix(XOR[4:8], s1_list)
     print("S1 result: ", s1_result)
-    # s1(XOR[4:8]) 
+    s_result = []
+    s_result = s0_result + s1_result
+    print(s_result)
+    p4 = permutate(s_result, p4_list)
+    print("P4: ", p4)
+    XOR = exclusiveOr(fk, p4)
+    print(XOR)
 
-keys = generateKey("1011000101")
-sdesEncryption("10101010", keys)
+    sw = rightIP + XOR[0:4]
+    print("SW: ", sw)
+    fk = sw[0:4]
+    rightsw = sw[4:8]
+    ep = permutate(rightsw, ep_list)
+    print("EP: ", ep)
+    xor = exclusiveOr(ep, k2)
+    s0_result = s_matrix(xor[0:4], s0_list)
+    s1_result = s_matrix(xor[4:8], s1_list)
+    s_result = []
+    s_result = s0_result + s1_result
+    p4 = permutate(s_result, p4_list)
+    xor = exclusiveOr(fk, p4)
+    result = xor + rightsw
+    print(result)
+    inverse_ip = permutate(result, inverse_ip_list)
+    print("Ciphertext: ", inverse_ip)
+
+
+
+
+keys = generateKey("0010010011")
+sdesEncryption("10010010", keys)
