@@ -9,6 +9,7 @@ from itertools import permutations
 
 def cipher(request):
     k1 = ""
+    k2 = ""
     if request.method == 'POST':
         form = MyForm(request.POST)
         if form.is_valid():
