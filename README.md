@@ -52,14 +52,14 @@
 ## Usage
 This program contains 2 different ciphers - Simplified Data Encryption Standard (S-DES) and Diffie-Hellman Key Exchange. 
 
-S-DES:
-  Encryption:
-    Enter a 10-bit key and 8-bit plaintext to encrypt your binary code. 
-  Decryption:
-    Enter a 10-bit key and 8-bit ciphertext to decipher your code.
+- S-DES:
+  - Encryption:
+    - Enter a 10-bit key and 8-bit plaintext to encrypt your binary code.
+  - Decryption:
+    - Enter a 10-bit key and 8-bit ciphertext to decipher your code.
 
-DH:
-  Encryption:
+- DH:
+  - Encryption:
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -72,16 +72,16 @@ aid in hosting my personal projects.
 <!-- ROADMAP -->
 ## Roadmap
 
-S-DES:
-- [X] Get Django website running
-- [X] Manipulate the input key to generate K1 and K2
-- [ ] Encrypt the plaintext using K1 and K2
-- [ ] Implement decryption
-- [ ] Add CSS
-- [ ] Perform and record testing
-- [ ] Clean up unecessary Django files
-Diffie-Hellman Key Exchange
-- [ ] Implement D-H key exchange
+- S-DES:
+  - [X] Get Django website running
+  - [X] Manipulate the input key to generate K1 and K2
+  - [ ] Encrypt the plaintext using K1 and K2
+  - [ ] Implement decryption
+  - [ ] Add CSS
+  - [ ] Perform and record testing
+  - [ ] Clean up unecessary Django files
+- Diffie-Hellman Key Exchange
+  - [ ] Implement D-H key exchange
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
