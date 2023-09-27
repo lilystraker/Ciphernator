@@ -75,7 +75,7 @@ aid in hosting my personal projects.
 - S-DES:
   - [X] Get Django website running
   - [X] Manipulate the input key to generate K1 and K2
-  - [ ] Encrypt the plaintext using K1 and K2
+  - [X] Encrypt the plaintext using K1 and K2
   - [ ] Implement decryption
   - [ ] Add CSS
   - [ ] Perform and record testing
