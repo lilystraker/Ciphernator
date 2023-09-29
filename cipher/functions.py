@@ -196,8 +196,46 @@ def sdesEncryption(plaintext, keys):
     inverse_ip = permutate(result, inverse_ip_list)
     print("Ciphertext: ", inverse_ip)
 
+def sdesDecipher(ciphertext, keys):
+    k1 = keys[0]
+    k2 = keys[1]
+    # perform IP
+    ip = permutate(ciphertext, ip_list)
+    # Apply E/P on right bits
+    ep = permutate(ip[4:8], ep_list)
+    
+    # perform XOR on ep and k2
+    xor = exclusiveOr(k2, ep)
 
+    s0_result = s_matrix(xor[0:4], s0_list)
+    s1_result = s_matrix(xor[4:8], s1_list)
 
+    s_result = s0_result + s1_result
+    p4 = permutate(s_result, p4_list)
+    xor = exclusiveOr(p4, ip[0:4])
+    ip[0:4] = xor
+    # SWAP
+    new_ip = ip[4:8] + ip[0:4]
+    # ep to right 4 bits
+    ep = permutate(new_ip[4:8], ep_list)
+    xor1 = exclusiveOr(ep, k1)
+    print("XOR1: ", xor1)
 
-keys = generateKey("0010010011")
-sdesEncryption("10010010", keys)
+    s0_result = s_matrix(xor1[0:4], s0_list)
+    s1_result = s_matrix(xor1[4:8], s1_list)
+
+    s_result = s0_result + s1_result
+    p4 = permutate(s_result, p4_list)
+    xor = exclusiveOr(p4, ip[4:8])
+    print(xor)
+    new_result = xor + ip[0:4]
+    print(new_result)
+
+    IP = permutate(new_result, inverse_ip_list)
+    print(IP)
+
+keys = generateKey("1010000010")
+sdesEncryption("10010111", keys)
+# correct !!!
+sdesDecipher("00111000", keys)
+
