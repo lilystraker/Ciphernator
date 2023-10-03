@@ -1,5 +1,5 @@
 
-
+import re
 # 
 p10_list = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
 ip_list = [2, 6, 3, 1, 4, 8, 5, 7]
@@ -83,6 +83,8 @@ def ls1(input, shift_amount=1):
 
 
 def generateKey(key):
+    # print input key
+    # print("10-bit Key: ", key)
     # Perform P10 function
     permutated = permutate(key, p10_list)
 
@@ -100,7 +102,7 @@ def generateKey(key):
     # Perform P8 function
     # Now we have K1
     k1 = permutate(merged_list, p8_list)
-    print("k1: ", k1)
+  
 
     # Left shift bit twice
     left = ls1(left, 2)
@@ -109,7 +111,7 @@ def generateKey(key):
     merged_list = merge(left, right)
 
     k2 = permutate(merged_list, p8_list)
-    print("k2: ", k2)
+
 
     return [k1, k2]
 
@@ -138,7 +140,6 @@ def s_matrix(input, matrix):
     col = input[1]
     col += input[2]
     col = int(col, 2)
-    print(row, col)
     # find 1st row, 3rd col of s0 = 0
     s0_result = matrix[row][col]
     
@@ -150,40 +151,29 @@ def s_matrix(input, matrix):
     # convert to binary
     return binary_result
 
-def sdesEncryption(plaintext, keys):
+def sdesEncryption(plaintext, key, keys):
     k1 = keys[0]
     k2 = keys[1]
 
     ip = permutate(plaintext, ip_list)
-    print("ip: ", ip)
     fk = ip[0:4]
     rightIP = ip[4:8]
-    print("right IP: ", rightIP)
     
     ep = permutate(rightIP, ep_list)
-    print("E/P: ", ep)
     XOR = exclusiveOr(ep, k1)
-    print("XOR: ", XOR)
 
     s0_result = s_matrix(XOR[0:4], s0_list)
-    print("S0 result: ", s0_result)
 
     s1_result = s_matrix(XOR[4:8], s1_list)
-    print("S1 result: ", s1_result)
     s_result = []
     s_result = s0_result + s1_result
-    print(s_result)
     p4 = permutate(s_result, p4_list)
-    print("P4: ", p4)
     XOR = exclusiveOr(fk, p4)
-    print(XOR)
 
     sw = rightIP + XOR[0:4]
-    print("SW: ", sw)
     fk = sw[0:4]
     rightsw = sw[4:8]
     ep = permutate(rightsw, ep_list)
-    print("EP: ", ep)
     xor = exclusiveOr(ep, k2)
     s0_result = s_matrix(xor[0:4], s0_list)
     s1_result = s_matrix(xor[4:8], s1_list)
@@ -192,11 +182,12 @@ def sdesEncryption(plaintext, keys):
     p4 = permutate(s_result, p4_list)
     xor = exclusiveOr(fk, p4)
     result = xor + rightsw
-    print(result)
     inverse_ip = permutate(result, inverse_ip_list)
-    print("Ciphertext: ", inverse_ip)
+    # Print all inputs and outputs
+    printOutput(plaintext, inverse_ip, key, keys)
 
-def sdesDecipher(ciphertext, keys):
+
+def sdesDecipher(ciphertext, key, keys):
     k1 = keys[0]
     k2 = keys[1]
     # perform IP
@@ -219,7 +210,6 @@ def sdesDecipher(ciphertext, keys):
     # ep to right 4 bits
     ep = permutate(new_ip[4:8], ep_list)
     xor1 = exclusiveOr(ep, k1)
-    print("XOR1: ", xor1)
 
     s0_result = s_matrix(xor1[0:4], s0_list)
     s1_result = s_matrix(xor1[4:8], s1_list)
@@ -227,15 +217,123 @@ def sdesDecipher(ciphertext, keys):
     s_result = s0_result + s1_result
     p4 = permutate(s_result, p4_list)
     xor = exclusiveOr(p4, ip[4:8])
-    print(xor)
     new_result = xor + ip[0:4]
-    print(new_result)
+
 
     IP = permutate(new_result, inverse_ip_list)
-    print(IP)
+    printOutput(''.join(IP), ciphertext, key, keys)
 
-keys = generateKey("1010000010")
-sdesEncryption("10010111", keys)
-# correct !!!
-sdesDecipher("00111000", keys)
+def checkKey(key):
+    keyRegex = "^[0-1]{10}$"
+    if (re.match(keyRegex, key)):
+        keyValid = True
+    else:
+        keyValid = False
+    return keyValid
+
+def checkInput(input):
+    inputRegex = "^[0-1]{8}$"
+    if (re.match(inputRegex, input)):
+        inputValid = True
+    else:
+        inputValid = False
+    return inputValid
+
+def printOutput(plaintext, ciphertext, key, keys):
+    print("\nOutputs:")
+    print("\tKey:\n\t\t", key)
+    print("\tPlaintext:\n\t\t", plaintext)
+    print("\tK1:\n\t\t", ''.join(keys[0]))
+    print("\tK2:\n\t\t", ''.join(keys[1]))
+    print("\tCiphertext:\n\t\t", ''.join(ciphertext))
+
+def main():
+    print("S-DES Cipher Encryption and Decryption\n")
+    cipherChosen = False
+    while (cipherChosen == False):
+        print("Input 'x' to exit\n")
+        cipher = input("Encrypt (e) or Decrypt (d)?\n")
+        keyValid = False
+        plaintextValid = False
+        
+        if (cipher.lower() == 'e'):
+            while (keyValid == False):
+                key = input("Enter a 10-bit key\n")
+                
+                keyValid = checkKey(key)
+
+                if (keyValid):
+                    keys = generateKey("0010010011")
+                    cipherChosen = True
+                elif (key == 'x'):
+                    print("Quitting program.")
+                    cipherChosen = True
+                    plaintextValid = True
+                    break
+                else:
+                    print("Please enter a valid 10-bit key in binary")
+
+            while (plaintextValid == False):
+                plaintext = input("Enter an 8-bit plaintext\n")
+
+                plaintextValid = checkInput(plaintext)
+
+                if (plaintextValid):
+                    cipherChosen = True
+                    # 8-bit plaintext
+                    sdesEncryption(plaintext, key, keys)
+                elif (plaintext == 'x'):
+                    print("Quitting program.")
+                    cipherChosen = True
+                    plaintextValid = True
+                    break
+                else:
+                    print("Please enter a valid 8-bit plaintext in binary")
+
+        elif (cipher.lower() == 'd'):
+            keyValid = False
+            ciphertextValid = False
+        
+            while (keyValid == False):
+                key = input("Enter a 10-bit key\n")
+                
+                keyValid = checkKey(key)
+
+                if (keyValid):
+                    keys = generateKey("0010010011")
+                    cipherChosen = True
+                elif (key == 'x'):
+                    print("Quitting program.")
+                    cipherChosen = True
+                    ciphertextValid = True
+                    break
+                else:
+                    print("Please enter a valid 10-bit key in binary")
+
+            while (ciphertextValid == False):
+                ciphertext = input("Enter an 8-bit ciphertext\n")
+
+                ciphertextValid = checkInput(ciphertext)
+
+                if (ciphertextValid):
+                    cipherChosen = True
+                    # 8-bit plaintext
+                    sdesDecipher(ciphertext, key, keys)
+                elif (ciphertext == 'x'):
+                    print("Quitting program.")
+                    cipherChosen = True
+                    ciphertextValid = True
+                    break
+                else:
+                    print("Please enter a valid 8-bit ciphertext in binary")
+        elif (cipher.lower() == 'x'):
+            print("Quitting program.")
+            cipherChosen = True
+        else:
+            print("Please enter 'e' or 'd'")
+
+
+main()
+
+
 
