@@ -76,10 +76,13 @@ aid in hosting my personal projects.
   - [X] Get Django website running
   - [X] Manipulate the input key to generate K1 and K2
   - [X] Encrypt the plaintext using K1 and K2
-  - [ ] Implement decryption
+  - [x] Implement decryption
+  - [X] *Create basic text menu
   - [ ] Add CSS
   - [ ] Perform and record testing
   - [ ] Clean up unecessary Django files
+
+    *Currently, the program has successful S-DES encryption and decryption processes. It is a complete Python file - just needs to be implemented in Django.
 - Diffie-Hellman Key Exchange
   - [ ] Implement D-H key exchange
 
