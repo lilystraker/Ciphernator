@@ -1,4 +1,5 @@
 #  Diffie-Helman Exchange Key Algorithm
+import random
 
 def square_and_multiply(base, exponent, modulus=None):
     result = 1
@@ -24,7 +25,20 @@ def isDecimal(input):
     except ValueError:
         print("That is not a valid decimal number")
         return False
-    
+
+def randomGeneration(limit=100):
+    random_int = random.randint(1, limit)
+    return random_int
+
+def calculateOutputs(p, g, xa, xb):
+    ya = square_and_multiply(g, xa, p)
+    yb = square_and_multiply(g, xb, p)
+    k1 = square_and_multiply(yb, xa, p)
+    k2 = square_and_multiply(ya, xb, p)
+
+    print("k1: ", k1)
+    print("k2: ", k2)
+
 def main():
     print("Diffie-Helman Exchange Key Algorithm")
     print("Press 'x' to exit program")
@@ -104,12 +118,20 @@ def main():
             if canProgramExit:
                 break 
 
-            ya = square_and_multiply(g, xa, p)
-            yb = square_and_multiply(g, xb, p)
-            k1 = square_and_multiply(yb, xa, p)
-            k2 = square_and_multiply(ya, xb, p)
+            calculateOutputs(p, g, xa, xb)
+
             print(k1)
             print(k2)
+        elif (isAuto):
+            p = randomGeneration(100)
+        
+            g = randomGeneration(p-1)
+            # what should be the limit of xa and xb?
+            xa = randomGeneration()
+            xb = randomGeneration()
 
+            print("p: %.2f\ng: %.2f\nxa: %.2f\nxb: %.2f" % (p, g, xa, xb))
+
+            calculateOutputs(p, g, xa, xb)
 
 main()
