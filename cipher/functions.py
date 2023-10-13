@@ -1,6 +1,7 @@
 
+
 import re
-# 
+# All permutation and s matrixes defined
 p10_list = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
 ip_list = [2, 6, 3, 1, 4, 8, 5, 7]
 inverse_ip_list = [4, 1, 3, 5, 7, 2, 8, 6]
@@ -27,53 +28,8 @@ def permutate(input, list):
     # Result is an array of characters
     return permutated
 
-def p10(key):
-    key_list = [num for num in key]
-
-    p10_list = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
-
-    permutated = []
-    column = 0
-
-    for column in range(0, len(p10_list)):
-        for num in range(0, len(key_list)):
-          if (p10_list[column] == num+1):
-              
-              permutated.append(key_list[num])
-              break
-              
-    # Result is an array of characters
-    return permutated
-
-def p8(key):
-    key_list = [num for num in key]
-
-    p8_list = [6, 3, 7, 4, 8, 5, 10, 9]
-
-    permutated = []
-    column = 0
-
-    for column in range(0, len(p8_list)):
-        for num in range(0, len(key_list)):
-          if (p8_list[column] == num+1):
-              
-              permutated.append(key_list[num])
-              break
-              
-    # Result is an array of characters
-    return permutated
-
-
-def merge(left, right):
-    merged_list = []
-    for elem in left:
-        merged_list.append(elem)
-    for elem in right:
-        merged_list.append(elem)
-    return merged_list
-
 # Assuming input is an array of characters
-def ls1(input, shift_amount=1):
+def ls(input, shift_amount=1):
     if len(input) <= 1:
         return input  # No change needed for lists with 0 or 1 element
 
@@ -87,30 +43,24 @@ def generateKey(key):
     # print("10-bit Key: ", key)
     # Perform P10 function
     permutated = permutate(key, p10_list)
-
     # Split P10 into two 5 bit numbers
     left = permutated[0:5]
     right = permutated[5:10]
 
     # Left shift both by 1 bit
-    left = ls1(left)
-    right = ls1(right)
-
-    # Merge them back together 
-    merged_list = merge(left, right)
+    left = ls(left)
+    right = ls(right)
 
     # Perform P8 function
     # Now we have K1
-    k1 = permutate(merged_list, p8_list)
+    k1 = permutate(left + right, p8_list)
   
 
     # Left shift bit twice
-    left = ls1(left, 2)
-    right = ls1(right, 2)
+    left = ls(left, 2)
+    right = ls(right, 2)
 
-    merged_list = merge(left, right)
-
-    k2 = permutate(merged_list, p8_list)
+    k2 = permutate(left + right, p8_list)
 
 
     return [k1, k2]
@@ -223,21 +173,8 @@ def sdesDecipher(ciphertext, key, keys):
     IP = permutate(new_result, inverse_ip_list)
     printOutput(''.join(IP), ciphertext, key, keys)
 
-def checkKey(key):
-    keyRegex = "^[0-1]{10}$"
-    if (re.match(keyRegex, key)):
-        keyValid = True
-    else:
-        keyValid = False
-    return keyValid
-
-def checkInput(input):
-    inputRegex = "^[0-1]{8}$"
-    if (re.match(inputRegex, input)):
-        inputValid = True
-    else:
-        inputValid = False
-    return inputValid
+def checkInput(input, regex):
+    return bool(re.match(regex, input))
 
 def printOutput(plaintext, ciphertext, key, keys):
     print("\nOutputs:")
@@ -246,6 +183,10 @@ def printOutput(plaintext, ciphertext, key, keys):
     print("\tK1:\n\t\t", ''.join(keys[0]))
     print("\tK2:\n\t\t", ''.join(keys[1]))
     print("\tCiphertext:\n\t\t", ''.join(ciphertext))
+
+    # Condensed printing output used for testing  
+    # print("Key:", key, "Plaintext:", plaintext, "K1:", ''.join(keys[0]), "K2:", ''.join(keys[1]), "Ciphertext:", ''.join(ciphertext))
+
 
 def main():
     print("S-DES Cipher Encryption and Decryption\n")
@@ -260,10 +201,10 @@ def main():
             while (keyValid == False):
                 key = input("Enter a 10-bit key\n")
                 
-                keyValid = checkKey(key)
+                keyValid = checkInput(key, "^[0-1]{10}$")
 
                 if (keyValid):
-                    keys = generateKey("0010010011")
+                    keys = generateKey(key)
                     cipherChosen = True
                 elif (key == 'x'):
                     print("Quitting program.")
@@ -276,7 +217,7 @@ def main():
             while (plaintextValid == False):
                 plaintext = input("Enter an 8-bit plaintext\n")
 
-                plaintextValid = checkInput(plaintext)
+                plaintextValid = checkInput(plaintext, "^[0-1]{8}$")
 
                 if (plaintextValid):
                     cipherChosen = True
@@ -297,10 +238,10 @@ def main():
             while (keyValid == False):
                 key = input("Enter a 10-bit key\n")
                 
-                keyValid = checkKey(key)
+                keyValid = checkInput(key, "^[0-1]{10}$")
 
                 if (keyValid):
-                    keys = generateKey("0010010011")
+                    keys = generateKey(key)
                     cipherChosen = True
                 elif (key == 'x'):
                     print("Quitting program.")
@@ -313,7 +254,7 @@ def main():
             while (ciphertextValid == False):
                 ciphertext = input("Enter an 8-bit ciphertext\n")
 
-                ciphertextValid = checkInput(ciphertext)
+                ciphertextValid = checkInput(ciphertext, "^[0-1]{8}$")
 
                 if (ciphertextValid):
                     cipherChosen = True
