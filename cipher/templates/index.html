@@ -1,24 +1,63 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
-<body>
+<html lang = "en">
 
-<h1>S-DES Encrypter</h1>
-<p>Please enter a 10-bit key and 8-bit plaintext to begin</p>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+    <head>
+        <!-- My CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'cipher/style.css' %}">
+        <!-- Google Fonts  -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Zilla+Slab:ital,wght@0,300;0,500;0,600;1,400&display=swap" rel="stylesheet">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- needs to have dynamic text -->   
+        <title>S-DES Encryption</title>
+    </head>
+    <body>
 
-<h1>Results</h1>
-<h2>K1</h2>
-<p>{{ k1 }}</p>
+        <div class = "navigation">
+                <!-- show drop down list of all cipher links -->
+            <a class = "nav-link" href = "#">Ciphers<button class="triangle-button">&#9660;</button></a>
+        </div>
 
-<h2>K2</h2>
-<p>{{ k2 }}</p>
+        <div id = "main-container">
+            <h1>ciphernator</h1>
+            <!-- needs to have dynamic text -->
+                <div id="select-container">
+                    <label for = "cipherType">S-DES Cipher</label>
+                    <div id = "custom-select">
+                        <select name = "cipherType" id = "cipherType">
+                            <option id = "cipherTypes" value="encryption">Encryption</option>
+                            <option id = "cipherTypes" value="decryption">Decryption</option>
+                        </select>
+                        <!-- display triangle symbol -->
+                        <button class="triangle-button" id = "select-button">&#9660;</button>
+                    </div>
+                </div>
+            <!-- <p>Please enter a 10-bit key and 8-bit plaintext to begin</p> -->
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- needs to have dynamic text -->
+                <button type="submit" class = "submitBtn">Encrypt</button>
+            </form>
 
-<h2>Ciphertext</h2>
-<!-- <p>{{ ciphertext }}</p> -->
+            <!-- Only show when form submitted -->
+            <!-- <h2>Key 1</h2>
+            <p>{{ k1 }}</p>
 
-</body>
+            <h2>Key 2</h2>
+            <p>{{ k2 }}</p> -->
+
+            <!-- <h2>Ciphertext</h2> -->
+        <!-- <p>{{ ciphertext }}</p> -->
+        </div>
+
+    </body>
+            <!-- My JS -->
+            <script src="{% static 'cipher/script.js' %}"></script>
 </html>
