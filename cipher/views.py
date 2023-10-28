@@ -14,17 +14,21 @@ def cipher(request):
 
     encryption_form = sdesEncryptionForm(request.POST)
     decryption_form = sdesDecryptionForm(request.POST)
-
+    is_encryption_form = False
+    is_decryption_form = False
+    
     if request.method == 'POST':
         selected_option = request.POST.get('cipherType')
 
         if selected_option == 'encryption' and encryption_form.is_valid():
+            is_encryption_form = True
             key = form.cleaned_data['key']
             plaintext = form.cleaned_data['plaintext']
             k1 = encrypt(key, plaintext)[0]
             k2 = encrypt(key, plaintext)[1]
             # Process the encryption form
         elif selected_option == 'decryption' and decryption_form.is_valid():
+            is_edecryption_form = True
             key = form.cleaned_data['key']
             plaintext = form.cleaned_data['plaintext']
             k1 = encrypt(key, plaintext)[0]

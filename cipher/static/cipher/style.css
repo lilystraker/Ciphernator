@@ -35,6 +35,17 @@ body {
     /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); */
   }
   
+  .navigation ul {
+    list-style: none;
+    padding: 0;
+  
+  }
+
+  .navigation li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
   /* Navigation links */
   .nav-link {
     text-align: center;
@@ -48,10 +59,49 @@ body {
     text-decoration: none;
   }
   
+  .navigation a {
+    text-decoration: none;
+  }
+
   .nav-link:hover {
     color: var(--lightaccent);
     transition-duration: 0.35s;
   }
+
+  .nav-link-dropdown {
+    color: var(--midtext);
+    font-size: 1.3em;
+    font-weight: 400;
+    font-family: 'Zilla Slab', serif;
+    padding: 10px;
+  }
+
+  .dropdown:hover .nav-link {
+    color: var(--lightaccent);
+  }
+
+  .nav-link-dropdown:hover {
+    color: var(--darkaccent);
+    transition-duration: 0.35s;
+  }
+
+  /* Styles for the dropdown menu */
+.dropdown:hover .dropdown-content {
+  transition-duration: 0.2s;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  min-width: 190px;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+}
+
+.dropdown-content li {
+  padding: 10px;
+}
 
   /* Main content */
   #main-container { 
@@ -75,7 +125,14 @@ body {
   { 
     font-family: 'Zilla Slab', serif;
     color: var(--midtext);
-    font-size: 1.7em;
+    font-size: 1.4em;
+  }
+
+  label #cipherTypeLbl {
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.4em;
+    width: 100%;
   }
 
   p {

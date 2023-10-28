@@ -23,17 +23,24 @@
 
         <div class = "navigation">
                 <!-- show drop down list of all cipher links -->
-            <a class = "nav-link" href = "#">Ciphers</a>
-            <a class = "nav-link" href = "#">Contact</a>
+                <li class="dropdown">
+                    <a class = "nav-link" href = "#">Ciphers</a>
+                    <ul class="dropdown-content">
+                        <li><a class = "nav-link-dropdown" href="#">S-DES</a></li>
+                        <li><a class = "nav-link-dropdown" href="#">Diffie-Helman</a></li>
+                        <li><a class = "nav-link-dropdown" href="#">RSA</a></li>
+                    </ul>
+                </li>
+            <li><a class = "nav-link" href = "#">Contact</a></li>
         </div>
 
         <div id = "main-container">
             <h1>ciphernator</h1>
             <!-- needs to have dynamic text -->
                 <div class="row">
-                    <div class = "col">
-                        <label for = "cipherType">S-DES Cipher</label>
-                    </div>
+                    <!-- <div class = "col"> -->
+                        <label id = "cipherTypeLbl" for = "cipherType">Simplified Data Encryption Standard (S-DES)</label>
+                    <!-- </div> -->
                 </div>
                 <div class = "row">
                     <div class = "col">
@@ -52,7 +59,7 @@
                 
           
             <!-- <p>Please enter a 10-bit key and 8-bit plaintext to begin</p> -->
-            <form method="post">
+            <form method="post" id = "form">
                 {% csrf_token %}
                <div id="encryption-form-placeholder">
                 <div class = "flex-container">
@@ -104,40 +111,27 @@
                 <!-- needs to have dynamic text -->
 
             </form>
-
+            <div id = "results-container">
             <!-- Only show when form submitted -->
-            <!-- <h2>Key 1</h2>
-            <p>{{ k1 }}</p>
+                <h2>Key 1</h2>
+                <p>{{ k1 }}</p>
 
-            <h2>Key 2</h2>
-            <p>{{ k2 }}</p> -->
-
-            <!-- <h2>Ciphertext</h2> -->
-        <!-- <p>{{ ciphertext }}</p> -->
-        </div>
+                <h2>Key 2</h2>
+                <p>{{ k2 }}</p> 
+                
+                {% if encryption_form.is_encryption_form %}
+                <p>encryption</p>
+                <!-- <h2>Ciphertext</h2>
+                <p>{{ ciphertext }}</p> -->
+                {% elif decryption_form.is_decryption_form %}
+                <p>decryption</p>
+                {% endif %}
+            </div>
 
     </body>
             <!-- My JS -->
-            <script src="{% static 'cipher/script.js' %}"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Hide both form placeholders initially
-        $('#encryption-form-placeholder').show();
-        $('#decryption-form-placeholder').hide();
-        
-        $('#cipherType').change(function () {
-            var selectedOption = $(this).val();
-            
-            if (selectedOption === 'encryption') {
-                $('#encryption-form-placeholder').show();
-                $('#decryption-form-placeholder').hide();
-            } else if (selectedOption === 'decryption') {
-                $('#encryption-form-placeholder').hide();
-                $('#decryption-form-placeholder').show();
-            }
-        });
-    });
-</script>
+            <script src="{% static 'cipher/script.js' %}"></script>
+
 
 </html>
