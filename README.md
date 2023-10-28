@@ -59,13 +59,12 @@ This program contains 2 different ciphers - Simplified Data Encryption Standard 
     - Enter a 10-bit key and 8-bit ciphertext to decipher your code.
 
 - DH:
-  - Encryption:
+  - Enter a prime number, primitive root, and two private numbers.
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Program
-This program was made for a university assignment. The aim of the assignment was to implement both S-DES and DH ciphers in any programming language. I chose Python so that I could simultaneously learn how to host a website using Django to
-aid in hosting my personal projects. 
+This program was made for a university assignment. The aim of the assignment was to implement both S-DES and DH ciphers in any programming language. I chose Python so that I could simultaneously learn how to host a website using Django to aid in hosting my personal projects. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -77,14 +76,19 @@ aid in hosting my personal projects.
   - [X] Manipulate the input key to generate K1 and K2
   - [X] Encrypt the plaintext using K1 and K2
   - [x] Implement decryption
-  - [X] *Create basic text menu
-  - [ ] Add CSS
-  - [ ] Perform and record testing
-  - [ ] Clean up unecessary Django files
+  - [X] Add CSS
+  - [X] Perform and record testing
 
-    *Currently, the program has successful S-DES encryption and decryption processes. It is a complete Python file - just needs to be implemented in Django.
 - Diffie-Hellman Key Exchange
-  - [ ] Implement D-H key exchange
+  - [X] Implement D-H key exchange
+  - [X] Manual input
+  - [X] Randomly generated input  
+  - [X] Perform and record testing
+
+- Add other ciphers
+  - [ ] RSA
+ 
+    *Currently, the program has successful S-DES and DHKE programs. They now just need to be implemented in Django.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
