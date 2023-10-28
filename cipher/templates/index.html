@@ -4,6 +4,8 @@
 <html lang = "en">
 
     <head>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- My CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'cipher/style.css' %}">
         <!-- Google Fonts  -->
@@ -21,27 +23,54 @@
 
         <div class = "navigation">
                 <!-- show drop down list of all cipher links -->
-            <a class = "nav-link" href = "#">Ciphers<button class="triangle-button">&#9660;</button></a>
+            <a class = "nav-link" href = "#">Ciphers</a>
         </div>
 
         <div id = "main-container">
             <h1>ciphernator</h1>
             <!-- needs to have dynamic text -->
-                <div id="select-container">
-                    <label for = "cipherType">S-DES Cipher</label>
-                    <div id = "custom-select">
-                        <select name = "cipherType" id = "cipherType">
-                            <option id = "cipherTypes" value="encryption">Encryption</option>
-                            <option id = "cipherTypes" value="decryption">Decryption</option>
-                        </select>
-                        <!-- display triangle symbol -->
-                        <button class="triangle-button" id = "select-button">&#9660;</button>
+                <div class="row">
+                    <div class = "col">
+                        <label for = "cipherType">S-DES Cipher</label>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col">
+                        <!-- <div id = "custom-select"> -->
+                            <select name = "cipherType" id = "cipherType">
+                                <option id = "cipherTypes" value="encryption">Encryption</option>
+                                <option id = "cipherTypes" value="decryption">Decryption</option>
+                            </select>
+
+                            <!-- display triangle symbol -->
+                            <!-- <button class="triangle-button" id = "select-button">&#9660;</button> -->
+                        <!-- </div> -->
                     </div>
                 </div>
             <!-- <p>Please enter a 10-bit key and 8-bit plaintext to begin</p> -->
             <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
+                <!-- {% csrf_token %}
+                {{ form.as_p }} -->
+                <div class = "flex-container">
+                    <div class="row field">
+                        <div class = "col-sm-3 lbl">
+                            <label for="{{ form.plaintext.id_for_label }}">8-bit Plaintext</label>
+                        </div>
+                        <div class = "col-sm-3 field">
+                            {{ form.plaintext }}
+                        </div>
+                    </div>
+                    
+                    <div class="row field">
+                        <div class = "col-sm-3 lbl">
+                            <label for="{{ form.key.id_for_label }}">10-bit Key</label>
+                        </div>
+                        <div class = "col-sm-3 field">
+                            {{ form.key }}
+                        </div>
+                    </div>
+                </div>
+
                 <!-- needs to have dynamic text -->
                 <button type="submit" class = "submitBtn">Encrypt</button>
             </form>

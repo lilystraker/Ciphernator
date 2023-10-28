@@ -2,6 +2,12 @@
 from django import forms
 
 class MyForm(forms.Form):
+
+    # https://stackoverflow.com/questions/39602903/django-form-how-hide-colon-from-initial-text
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""  # Removes colon in labels
+
     plaintext = forms.CharField(
     min_length=8,
     max_length=8,
