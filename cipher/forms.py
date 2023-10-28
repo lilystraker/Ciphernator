@@ -8,15 +8,36 @@ class MyForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.label_suffix = ""  # Removes colon in labels
 
+    # plaintext = forms.CharField(
+    # min_length=8,
+    # max_length=8,
+    # widget=forms.TextInput(attrs={'class': 'cipherInput'}),
+    # label="8-Bit plaintext")
+
+    # key = forms.CharField(
+    # min_length=10,
+    # max_length=10,
+    # widget=forms.TextInput(attrs={'class': 'cipherInput'}),
+    # label="10-Bit key")
+    
+class sdesEncryptionForm(forms.Form):
     plaintext = forms.CharField(
     min_length=8,
     max_length=8,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}),
-    label="8-bit plaintext")
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
 
     key = forms.CharField(
     min_length=10,
     max_length=10,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}),
-    label="10-bit key")
-    
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+
+class sdesDecryptionForm(forms.Form):
+    ciphertext = forms.CharField(
+    min_length=8,
+    max_length=8,
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+
+    key = forms.CharField(
+    min_length=10,
+    max_length=10,
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}))

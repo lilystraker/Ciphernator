@@ -3,26 +3,39 @@
 
 from django.http import HttpResponse
 from django.template import loader
-from .forms import MyForm
+from .forms import MyForm, sdesEncryptionForm, sdesDecryptionForm
 from django.shortcuts import render
 from itertools import permutations
 
 def cipher(request):
     k1 = ""
     k2 = ""
+    form = MyForm()
+
+    encryption_form = sdesEncryptionForm(request.POST)
+    decryption_form = sdesDecryptionForm(request.POST)
+
     if request.method == 'POST':
-        form = MyForm(request.POST)
-        if form.is_valid():
+        selected_option = request.POST.get('cipherType')
+
+        if selected_option == 'encryption' and encryption_form.is_valid():
             key = form.cleaned_data['key']
             plaintext = form.cleaned_data['plaintext']
             k1 = encrypt(key, plaintext)[0]
             k2 = encrypt(key, plaintext)[1]
-    else:
-        form = MyForm()
+            # Process the encryption form
+        elif selected_option == 'decryption' and decryption_form.is_valid():
+            key = form.cleaned_data['key']
+            plaintext = form.cleaned_data['plaintext']
+            k1 = encrypt(key, plaintext)[0]
+            k2 = encrypt(key, plaintext)[1]
+            # Process the decryption form
+
+    return render(request, 'index.html', {
+        'encryption_form': encryption_form,
+        'decryption_form': decryption_form,
+    })
   
-
-    return render(request, 'index.html', {'form': form, 'k1': k1, 'k2' : k2})
-
 
 def p10(key):
     key_list = [num for num in key]

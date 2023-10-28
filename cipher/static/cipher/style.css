@@ -169,6 +169,12 @@ label[for="cipherType"] {
   padding: 10px;
 }
 
+select option {
+  font-family: 'Zilla Slab', serif;
+  color: var(--midtext);
+  font-size: 1em;
+}
+
 select[id="cipherType"] {
   font-family: 'Zilla Slab', serif;
   font-weight: 500;
