@@ -5,14 +5,15 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("form");
+    var submitBtn = document.getElementById('submitBtn');
 
-    form.addEventListener("submit", function(event) {
-        console.log("DOM is loaded.");  // Check if this message appears
+    // when submit button clicked
+    submitBtn.addEventListener("click", function(event) {
         // Prevent the default form submission behavior (if needed)
         event.preventDefault();
 
         // Form has been submitted; you can perform actions here
-        $('#results-container').show();
+        document.getElementById('results-container').style.display = 'block'; // Show
 
         // Access form data if needed
         // var formData = new FormData(form);
@@ -27,7 +28,8 @@ $(document).ready(function () {
     document.getElementById('encryption-form-placeholder').style.display = 'block'; // Show
     document.getElementById('decryption-form-placeholder').style.display = 'none'; // Hide
     
-    $('#results-container').hide();
+    document.getElementById('results-container').style.display = 'none'; // Show
+
     
     $('#cipherType').change(function () {
         var selectedOption = $(this).val();
