@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // when submit button clicked
     submitBtn.addEventListener("click", function(event) {
         // Prevent the default form submission behavior (if needed)
-        event.preventDefault();
 
+        form.submit();
         // Form has been submitted; you can perform actions here
         document.getElementById('results-container').style.display = 'block'; // Show
 
@@ -28,7 +28,7 @@ $(document).ready(function () {
     document.getElementById('encryption-form-placeholder').style.display = 'block'; // Show
     document.getElementById('decryption-form-placeholder').style.display = 'none'; // Hide
     
-    document.getElementById('results-container').style.display = 'none'; // Show
+    // document.getElementById('results-container').style.display = 'none'; // Show
 
     
     $('#cipherType').change(function () {
