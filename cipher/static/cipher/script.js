@@ -8,19 +8,11 @@ document.addEventListener("DOMContentLoaded", function() {
     var submitBtn = document.getElementById('submitBtn');
 
     // when submit button clicked
-    submitBtn.addEventListener("click", function(event) {
-        // Prevent the default form submission behavior (if needed)
-
-        form.submit();
-        // Form has been submitted; you can perform actions here
-        document.getElementById('results-container').style.display = 'block'; // Show
-
-        // Access form data if needed
-        // var formData = new FormData(form);
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0] + ': ' + pair[1]);
-        // }
-    });
+    form.addEventListener('submit', function() {
+        // prevent reload
+        event.preventDefault()
+        document.getElementById('results-container').style.display = 'block'; // or 'flex'
+      });
 });
 
 $(document).ready(function () {
@@ -32,6 +24,8 @@ $(document).ready(function () {
 
     
     $('#cipherType').change(function () {
+        event.preventDefault();
+
         var selectedOption = $(this).val();
         
         if (selectedOption === 'encryption') {

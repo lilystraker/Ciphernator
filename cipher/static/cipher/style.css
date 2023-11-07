@@ -310,3 +310,15 @@ select[id="cipherType"] {
 .row.field {
   margin-bottom: 10px;
 }
+
+.row.selectBox {
+  margin-bottom: 30px;
+}
+
+.flex-container {
+  margin-top: 30px;
+}
+
+#results-container {
+  margin-bottom: 100px;
+}

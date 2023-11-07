@@ -51,14 +51,13 @@
                 <form method="post" id = "form">
                     {% csrf_token %}
 
-                    <div class = "row">
+                    <div class = "row selectBox">
                         <div class = "col">
                             <!-- <div id = "custom-select"> -->
                                 <select name = "cipherType" id = "cipherType">
                                     <option id = "cipherTypes" value="encryption">Encryption</option>
                                     <option id = "cipherTypes" value="decryption">Decryption</option>
                                 </select>
-    
                                 <!-- display triangle symbol -->
                                 <!-- <button class="triangle-button" id = "select-button">&#9660;</button> -->
                             <!-- </div> -->
@@ -133,7 +132,7 @@
                 <!-- needs to have dynamic text -->
                 
             </form>
-            <div id = "results-container">
+            <div id = "results-container" style="display: none;">
             <!-- Only show when form submitted -->
 
                 <h2>Plaintext</h2>
@@ -147,6 +146,9 @@
 
                 <h2>Ciphertext</h2>
                 <p>{{ ciphertext }}</p> 
+
+                <h2>Input Key</h2>
+                <p>{{ key }}</p> 
 
 
                 
