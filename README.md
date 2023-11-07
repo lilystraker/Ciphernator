@@ -71,15 +71,16 @@ This program was made for a university assignment. The aim of the assignment was
 <!-- ROADMAP -->
 ## Roadmap
 
+Programs: 
+
 - S-DES:
   - [X] Get Django website running
-  - [X] Manipulate the input key to generate K1 and K2
+  - [X] Use the input key to generate K1 and K2
   - [X] Encrypt the plaintext using K1 and K2
   - [x] Implement decryption
-  - [X] Add CSS
   - [X] Perform and record testing
 
-- Diffie-Hellman Key Exchange
+- Diffie-Hellman Key Exchange:
   - [X] Implement D-H key exchange
   - [X] Manual input
   - [X] Randomly generated input  
@@ -87,8 +88,14 @@ This program was made for a university assignment. The aim of the assignment was
 
 - Add other ciphers
   - [ ] RSA
- 
-    *Currently, the program has successful S-DES and DHKE programs. They now just need to be implemented in Django.
+
+Website:
+- SDES:
+  - [X] Allow user to input plaintext and key
+  - [X] Display encryption and decryption form based on user selected type
+  - [X] Display results box with input key, plaintext, ciphertext, K1, and K2
+  - [ ] Perform testing
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
