@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     
     $('#cipherType').change(function () {
-        event.preventDefault();
+        // event.preventDefault();
 
         var selectedOption = $(this).val();
         

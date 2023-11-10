@@ -9,11 +9,11 @@ from itertools import permutations
 import re
 
 def cipher(request):
-    k1 = "N/A"
-    k2 = "N/A"
-    ciphertext = "N/A"
-    plaintext = "N/A"
-    key = "N/A"
+    k1 = ""
+    k2 = ""
+    ciphertext = ""
+    plaintext = ""
+    key = ""
     form = MyForm()
 
     encryption_form = sdesEncryptionForm(request.POST)
