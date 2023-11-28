@@ -18,6 +18,20 @@ document.addEventListener("DOMContentLoaded", function() {
         decryptionForm.style.display = "block";
         encryptionForm.style.display = "none";
     }
+
+    $(".encrypt-button").click(function(){
+        // $(this).classList.add('custom-active');
+        $(this).toggleClass("custom-active");
+        $(".decrypt-button").removeClass("custom-active")
+
+    });
+
+    $(".decrypt-button").click(function(){
+        $(this).toggleClass("custom-active");
+        $(".encrypt-button").removeClass("custom-active")
+        // $(".encrypt-button").toggleClass("active");
+    });
+
     // var plaintext = document.getElementById('plaintext').value;
     // console.log('Plaintext:', plaintext);
 
@@ -32,6 +46,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function showForm(selectedOption) {
 
+    // Following code is used to get my CSS variables
+    // Get the root element
+    var root = document.documentElement;
+
+     // Get the computed style of the root element
+    var css = getComputedStyle(root);
+
+    // Get the value of the CSS colour variables
+    var encryptColor = css.getPropertyValue('--encrypt');
+    var decryptColor = css.getPropertyValue('--decrypt');
+
     encryptionForm = document.getElementById("encryption-form-placeholder")
     encryptionForm.style.display = selectedOption === "encryption" ? "block" : "none";
     decryptionForm = document.getElementById("decryption-form-placeholder")
@@ -40,7 +65,14 @@ function showForm(selectedOption) {
     isEncryption = (encryptionForm === "block") ? true : false;
     isDecryption = (decryptionForm === "block") ? true : false;
 
-    console.log(selectedOption)
+    var encryptionButton = document.getElementsByClassName("encrypt-button")
+
+    if (isEncryption) {
+        encryptionButton.style.backgroundColor = encryptColor;
+    }
+    else if (isDecryption) {
+        decryptionButton.style.backgroundColor = decryptColor;
+    }
 }
 
 document.getElementById('encryption-form-placeholder').addEventListener('submit', function(event) {

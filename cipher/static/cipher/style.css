@@ -14,6 +14,12 @@
     --midtext: rgb(255, 255, 255, 0.80);
     /* dim white */
     --smalltext: rgb(255, 255, 255, 0.60);
+    /* green */
+    --encrypt: #bfb2ff;
+    /* red */
+    /* --decrypt: #DE6C83; */
+    --decrypt: #FDF5BF;
+    --decryptdark: #ecdc70;
   }
 
 body {
@@ -140,23 +146,26 @@ body {
     color: var(--midtext);
     font-size: 1.2em;
   }
-
-  .submitBtn {
+  
+  .btn-primary {
     background-color: var(--lightaccent);
     color: var(--background);
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1.3em;
-    font-weight: 500;
     font-family: 'Zilla Slab', serif;
-    width: 125px;
-    cursor: pointer;
   }
 
-  .submitBtn:hover {
-    background-color: var(--darkaccent);
-    transition-duration: 0.35s;
+  .decryptSubmit {
+    background-color: var(--decrypt); 
+  }
+
+  .decryptSubmit:hover {
+    background-color: var(--decryptdark) !important;
+    transition-duration: 0.35s !important;
+    color: var(--background) !important;
+  }
+
+  .encryptSubmit:hover {
+    background-color: var(--darkaccent) !important;
+    transition-duration: 0.35s !important;
   }
 
   .submitBtn:focus, .submitBtn:active {
@@ -283,7 +292,6 @@ select[id="cipherType"] {
 }
 
 
-
 .row {
   display: block;
   justify-content: center;
@@ -321,4 +329,56 @@ select[id="cipherType"] {
 
 #results-container {
   margin-bottom: 100px;
+}
+
+.tablinks {
+  font-family: 'Zilla Slab', serif;
+}
+
+.encrypt-button {
+  border-color: var(--encrypt);
+  color: var(--midtext);
+}
+
+.encrypt-button:hover {
+  background-color: var(--darkaccent);
+  color: var(--background)
+}
+
+.encrypt-button:active, .encrypt-button.active .encrypt-button.custom-active {
+  background-color: var(--encrypt) !important;
+  color: var(--background) !important;
+}
+
+.encrypt-button.custom-active, .encrypt-button:focus {
+  background-color: var(--encrypt) !important;
+  color: var(--background) !important;
+}
+
+.decrypt-button {
+  border-color: var(--decrypt);
+  color: var(--midtext);
+}
+
+.decrypt-button:hover {
+  background-color: var(--decryptdark);
+  color: var(--background)
+}
+
+.decrypt-button:active, .decrypt-button.active .decrypt-button.custom-active  {
+  background-color: var(--decrypt) !important;
+  color: var(--background) !important;
+}
+
+.decrypt-button.custom-active, .decrypt-button:focus{
+  background-color: var(--decrypt) !important;
+  color: var(--background) !important;
+}
+
+.encryptInput {
+  border-color: var(--encrypt);
+}
+
+.decryptInput {
+  border-color: var(--decrypt);
 }
