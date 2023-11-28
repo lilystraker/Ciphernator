@@ -79,11 +79,11 @@ function isInputValid(input, bits) {
 
 function validate(type) {
     
-    var key = document.getElementById('id_key').value;
-
     // Check the inputs are valid
 
     if (type == 'encryption') {
+        var plaintext = document.getElementById('id_plaintext').value;
+        var key = document.getElementById('id_key').value;
         if (!isInputValid(plaintext, 8)) {
             // Display error message
             document.getElementById("plaintext-error").style.display = "block";
@@ -94,6 +94,7 @@ function validate(type) {
         }
     }
     if (type == 'decryption') {
+        var ciphertext = document.getElementById('id_plaintext').value;
         if (!isInputValid(ciphertext, 8)) {
             // Display error message
             document.getElementById("ciphertext-error").style.display = "block";
@@ -119,11 +120,17 @@ document.getElementById('encryption-form-placeholder').addEventListener('submit'
         // prevent submit
         event.preventDefault();
     }
+    else {
+        document.getElementById("plaintext-error").style.display = "none";
+    }
     if (!isInputValid(key, 10)) {
         // Display error message
         document.getElementById("key-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+    }
+    else {
+        document.getElementById("key-error").style.display = "none";
     }
 
 
@@ -157,11 +164,19 @@ document.getElementById('decryption-form-placeholder').addEventListener('submit'
         // prevent submit
         event.preventDefault();
     }
+    else {
+        document.getElementById("ciphertext-error").style.display = "none";
+    }
+
     if (!isInputValid(key, 10)) {
         // Display error message
         document.getElementById("keycipher-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+    }
+    else {
+        document.getElementById("keycipher-error").style.display = "none";
+
     }
 
     // Submit the form using AJAX

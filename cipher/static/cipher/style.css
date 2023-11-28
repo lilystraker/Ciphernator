@@ -177,9 +177,14 @@ body {
     transition-duration: 0.35s !important;
   }
 
-  .submitBtn:focus, .submitBtn:active {
-    background-color: var(--darkaccent);
+  .encryptSubmit:focus, .encryptSubmit:active {
+    background-color: var(--darkaccent) !important;
   }
+
+  .decryptSubmit:focus, .decryptSubmit:active {
+    background-color: var(--decryptdark) !important;
+  }
+
 
   form {
     margin-top: 30px;
@@ -330,7 +335,8 @@ select[id="cipherType"] {
 }
 
 .row.field {
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  
 }
 
 .row.selectBox {
@@ -411,6 +417,6 @@ select[id="cipherType"] {
 
 .error-message {
   color: var(--error);
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Arial';
   font-size: 1em;
 }
