@@ -1,6 +1,6 @@
 # myenv\Scripts\activate
 # py manage.py runserver
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import loader
 from .forms import MyForm, sdesEncryptionForm, sdesDecryptionForm
@@ -8,15 +8,88 @@ from django.shortcuts import render
 from itertools import permutations
 import re
 
+# @csrf_exempt
+# def encrypt_view(request):
+#     k1 = ""
+#     k2 = ""
+#     ciphertext = ""
+#     plaintext = ""
+#     key = ""
+#     encryption_form = sdesEncryptionForm()
+#     if request.method == 'POST':
+        
+#         print(request.POST)
+#         print(encryption_form.errors)
+#         if encryption_form.is_valid():
+
+#         # Handle encryption form
+#             form = encryption_form
+#             key = form.cleaned_data['key']
+#             plaintext = form.cleaned_data['plaintext']
+
+
+#             keys = generateKey(key)
+#             k1 = ''.join(keys[0])
+#             k2 = ''.join(keys[1])
+#             ciphertext = ''.join(sdesEncryption(plaintext, key, keys))
+#     else:
+#         print("request.method was not POST")
+
+#     print("Plaintext: ", plaintext)
+#     print("Key: ", key)
+#     print("k1: ", k1)
+#     print("k2: ", k2)
+#     print("Ciphertext: ", ciphertext)
+    
+#     return render(request, 'index.html', {
+#         'encryption_form': encryption_form,
+#         'k1' : k1, 'k2' : k2, 'ciphertext': ciphertext, 'plaintext': plaintext, 'key': key,
+#     })
+
+
+# def decrypt_view(request):
+#     k1 = ""
+#     k2 = ""
+#     ciphertext = ""
+#     plaintext = ""
+#     key = ""
+#     decryption_form = sdesDecryptionForm()
+#     if request.method == 'POST' and decryption_form.is_valid():
+#         # Handle decryption form
+#             form = decryption_form
+#             key = form.cleaned_data['key']
+#             ciphertext = form.cleaned_data['ciphertext']
+
+#             print(request.POST)
+#             print(form.errors)
+
+#             keys = generateKey(key)
+#             k1 = ''.join(keys[0])
+#             k2 = ''.join(keys[1])
+#             plaintext = ''.join(sdesDecipher(ciphertext, key, keys))
+#     else:
+#         print("request.method was not POST")
+
+#     print("Plaintext: ", plaintext)
+#     print("Key: ", key)
+#     print("k1: ", k1)
+#     print("k2: ", k2)
+#     print("Ciphertext: ", ciphertext)
+    
+#     return render(request, 'index.html', {
+#         'decryption_form': decryption_form,
+#         'k1' : k1, 'k2' : k2, 'ciphertext': ciphertext, 'plaintext': plaintext, 'key': key,
+#     })
+
+
 def cipher(request):
-    k1 = "101"
+    k1 = ""
     k2 = ""
     ciphertext = ""
     plaintext = ""
     key = ""
     form = MyForm()
-
-
+    form_to_display = request.GET.get('form', 'encryption')  # Default to 'encryption' if no parameter is provided
 
     # form = sdesEncryptionForm(initial={'form_id': 'encryption'})
     encryption_form = sdesEncryptionForm()
@@ -27,36 +100,36 @@ def cipher(request):
         decryption_form = sdesDecryptionForm(request.POST)
 
         if encryption_form.is_valid():
-            form = encryption_form
-            key = form.cleaned_data['key']
-            plaintext = form.cleaned_data['plaintext']
+            form_id = encryption_form.cleaned_data['form_id']
 
-            print(request.POST)
-            print(form.errors)
+            if (form_id == 'encryption'):
+                form = encryption_form
+                key = form.cleaned_data['key']
+                plaintext = form.cleaned_data['plaintext']
 
-            keys = generateKey(key)
-            k1 = ''.join(keys[0])
-            k2 = ''.join(keys[1])
-            ciphertext = ''.join(sdesEncryption(plaintext, key, keys))
+                print(request.POST)
+                print(form.errors)
 
+                keys = generateKey(key)
+                k1 = ''.join(keys[0])
+                k2 = ''.join(keys[1])
+                ciphertext = ''.join(sdesEncryption(plaintext, key, keys))
 
-            # Encryption button was pressed
         if decryption_form.is_valid():
-            form = decryption_form
-            key = form.cleaned_data['key']
-            ciphertext = form.cleaned_data['ciphertext']
-            print("Plaintext: ", plaintext)
-            print("Key: ", key)
-            print("k1: ", k1)
-            print("k2: ", k2)
-            print("Ciphertext: ", ciphertext)
-            print(request.POST)
-            print(form.errors)
+            form_id = decryption_form.cleaned_data['form_id']
 
-            keys = generateKey(key)
-            k1 = ''.join(keys[0])
-            k2 = ''.join(keys[1])
-            plaintext = ''.join(sdesDecipher(ciphertext, key, keys))
+            if (form_id == 'decryption'):
+                form = decryption_form
+                key = form.cleaned_data['key']
+                ciphertext = form.cleaned_data['ciphertext']
+
+                print(request.POST)
+                print(form.errors)
+
+                keys = generateKey(key)
+                k1 = ''.join(keys[0])
+                k2 = ''.join(keys[1])
+                plaintext = ''.join(sdesDecipher(ciphertext, key, keys))
     else:
         print("request.method was not POST")
 
@@ -70,6 +143,7 @@ def cipher(request):
         'encryption_form': encryption_form,
         'decryption_form': decryption_form,
         'k1' : k1, 'k2' : k2, 'ciphertext': ciphertext, 'plaintext': plaintext, 'key': key,
+        'form_to_display': form_to_display,
     })
   
 
@@ -147,7 +221,6 @@ def generateKey(key):
 
 def exclusiveOr(binary1, binary2):
     """ Perform an XOR operation on two binary numbers """
-
     XOR_result = []
     # Go through each number in both binary numbers
     # If the numbers match, add a 0 to the resulting array

@@ -52,9 +52,8 @@
                 <button name = "cipherButton" value = "encryption" class="tablinks" onclick="showForm('encryption')">Encryption</button>
                 <button name = "cipherButton" value = "decryption" class="tablinks" onclick="showForm('decryption')">Decryption</button>
             </div>
-
                <div id="encryption-form-placeholder">
-                <form method="post" id = "form">
+                <form method="post" id = "form" action="?form=encryption">
                     {% csrf_token %}
 
                     <div class = "row selectBox">
@@ -94,13 +93,12 @@
                 </div>
                 <input type="hidden" name="form_id" value="encryption" placeholder="encryption">
 
-                <button type="submit" id = "submitBtn" class = "submitBtn">Encrypt</button>
+                <button type="submit" id = "submitBtn" class = "submitBtn"  onclick="showForm('encryption')">Encrypt</button>
                 </form>
                 </div>
-
                 <!-- Decryption form -->
                 <div id="decryption-form-placeholder">
-                <form method="post" id = "form">
+                <form method="post" id = "form"  action="?form=decryption">
                 {% csrf_token %}
                 
                 <div class = "row">
@@ -142,7 +140,7 @@
                 <!-- <input value = "chosenCipher">decryption</p> -->
                 <input type="hidden" name="form_id" value="decryption" placeholder="decryption">
 
-                <button type="submit" id = "submitBtn" class = "submitBtn">Decrypt</button>
+                <button type="submit" id = "submitBtn" class = "submitBtn" onclick="showForm('decryption')">Decrypt</button>
              </form>
             </div>
                 <!-- needs to have dynamic text -->
@@ -178,10 +176,10 @@
             </div>
 
     
-
-    </body>
             <!-- My JS -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="{% static 'cipher/script.js' %}"></script>
+
+    </body>
 
 </html>
