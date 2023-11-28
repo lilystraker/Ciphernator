@@ -46,7 +46,13 @@
                 
           
             <!-- <p>Please enter a 10-bit key and 8-bit plaintext to begin</p> -->
-            
+
+
+            <div class="tab">
+                <button name = "cipherButton" value = "encryption" class="tablinks" onclick="showForm('encryption')">Encryption</button>
+                <button name = "cipherButton" value = "decryption" class="tablinks" onclick="showForm('decryption')">Decryption</button>
+            </div>
+
                <div id="encryption-form-placeholder">
                 <form method="post" id = "form">
                     {% csrf_token %}
@@ -54,10 +60,11 @@
                     <div class = "row selectBox">
                         <div class = "col">
                             <!-- <div id = "custom-select"> -->
-                                <select name = "cipherType" id = "cipherType">
+                                <!-- <select name = "cipherType" id = "cipherType" onchange="showForm()">
+                                    <option value="" disabled selected>Select an option</option>
                                     <option id = "cipherTypes" value="encryption">Encryption</option>
                                     <option id = "cipherTypes" value="decryption">Decryption</option>
-                                </select>
+                                </select> -->
                                 <!-- display triangle symbol -->
                                 <!-- <button class="triangle-button" id = "select-button">&#9660;</button> -->
                             <!-- </div> -->
@@ -66,6 +73,7 @@
 
                     
                 <div class = "flex-container">
+                    
                     <div class="row field">
                         <div class = "col-sm-3 lbl">
                             <label for="{{ encryption_form.plaintext.id_for_label }}">8-Bit Plaintext</label>
@@ -84,6 +92,8 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="form_id" value="encryption" placeholder="encryption">
+
                 <button type="submit" id = "submitBtn" class = "submitBtn">Encrypt</button>
                 </form>
                 </div>
@@ -95,11 +105,14 @@
                 
                 <div class = "row">
                     <div class = "col">
+                        
+
                         <!-- <div id = "custom-select"> -->
-                            <select name = "cipherType" id = "cipherType">
+                            <!-- <select name = "cipherType" id = "cipherType">
+                                <option value="" disabled selected>Select an option</option>
                                 <option id = "cipherTypes" value="encryption">Encryption</option>
                                 <option id = "cipherTypes" value="decryption">Decryption</option>
-                            </select>
+                            </select> -->
 
                             <!-- display triangle symbol -->
                             <!-- <button class="triangle-button" id = "select-button">&#9660;</button> -->
@@ -126,13 +139,16 @@
                         </div>
                     </div>
                 </div>
+                <!-- <input value = "chosenCipher">decryption</p> -->
+                <input type="hidden" name="form_id" value="decryption" placeholder="decryption">
+
                 <button type="submit" id = "submitBtn" class = "submitBtn">Decrypt</button>
              </form>
             </div>
                 <!-- needs to have dynamic text -->
                 
             </form>
-            <div id = "results-container" style="display: none;">
+            <div id = "results-container" style="display: block;">
             <!-- Only show when form submitted -->
 
                 <h2>Plaintext</h2>
@@ -161,10 +177,11 @@
                 {% endif %}
             </div>
 
+    
+
     </body>
             <!-- My JS -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="{% static 'cipher/script.js' %}"></script>
-
 
 </html>

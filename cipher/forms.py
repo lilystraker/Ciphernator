@@ -24,20 +24,27 @@ class sdesEncryptionForm(forms.Form):
     plaintext = forms.CharField(
     min_length=8,
     max_length=8,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}), required=False)
 
     key = forms.CharField(
     min_length=10,
     max_length=10,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}), required=False)
+
+    form_id = forms.CharField(
+        widget=forms.HiddenInput(), required=False)
+    
 
 class sdesDecryptionForm(forms.Form):
     ciphertext = forms.CharField(
     min_length=8,
     max_length=8,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}), required=False)
 
     key = forms.CharField(
     min_length=10,
     max_length=10,
-    widget=forms.TextInput(attrs={'class': 'cipherInput'}))
+    widget=forms.TextInput(attrs={'class': 'cipherInput'}), required=False)
+
+    form_id = forms.CharField(
+        widget=forms.HiddenInput(), required=False)

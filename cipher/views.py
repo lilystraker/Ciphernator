@@ -9,48 +9,63 @@ from itertools import permutations
 import re
 
 def cipher(request):
-    k1 = ""
+    k1 = "101"
     k2 = ""
     ciphertext = ""
     plaintext = ""
     key = ""
     form = MyForm()
 
-    encryption_form = sdesEncryptionForm(request.POST)
-    decryption_form = sdesDecryptionForm(request.POST)
-    is_encryption_form = False
-    is_decryption_form = False
-    
+
+
+    # form = sdesEncryptionForm(initial={'form_id': 'encryption'})
+    encryption_form = sdesEncryptionForm()
+    decryption_form = sdesDecryptionForm()
+
     if request.method == 'POST':
-        selected_option = request.POST.get('cipherType')
-        print("selected_option:", selected_option)
-        if selected_option == 'encryption' and encryption_form.is_valid():
+        encryption_form = sdesEncryptionForm(request.POST)
+        decryption_form = sdesDecryptionForm(request.POST)
+
+        if encryption_form.is_valid():
             form = encryption_form
-            is_encryption_form = True
             key = form.cleaned_data['key']
             plaintext = form.cleaned_data['plaintext']
+
+            print(request.POST)
+            print(form.errors)
+
             keys = generateKey(key)
             k1 = ''.join(keys[0])
             k2 = ''.join(keys[1])
             ciphertext = ''.join(sdesEncryption(plaintext, key, keys))
-            # Process the encryption form
-        elif selected_option == 'decryption' and decryption_form.is_valid():
+
+
+            # Encryption button was pressed
+        if decryption_form.is_valid():
             form = decryption_form
-            is_decryption_form = True
             key = form.cleaned_data['key']
             ciphertext = form.cleaned_data['ciphertext']
+            print("Plaintext: ", plaintext)
+            print("Key: ", key)
+            print("k1: ", k1)
+            print("k2: ", k2)
+            print("Ciphertext: ", ciphertext)
+            print(request.POST)
+            print(form.errors)
 
             keys = generateKey(key)
             k1 = ''.join(keys[0])
             k2 = ''.join(keys[1])
             plaintext = ''.join(sdesDecipher(ciphertext, key, keys))
-
-            
-            # Process the decryption form
     else:
         print("request.method was not POST")
-    
 
+    print("Plaintext: ", plaintext)
+    print("Key: ", key)
+    print("k1: ", k1)
+    print("k2: ", k2)
+    print("Ciphertext: ", ciphertext)
+    
     return render(request, 'index.html', {
         'encryption_form': encryption_form,
         'decryption_form': decryption_form,
