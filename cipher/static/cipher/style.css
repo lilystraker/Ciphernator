@@ -14,11 +14,13 @@
     --midtext: rgb(255, 255, 255, 0.80);
     /* dim white */
     --smalltext: rgb(255, 255, 255, 0.60);
-    /* green */
+    /* light purple */
     --encrypt: #bfb2ff;
-    /* red */
-    /* --decrypt: #DE6C83; */
+    /* light red */
+    --error: #DE6C83;
+    /* pale yellow */
     --decrypt: #FDF5BF;
+    /* yellow */
     --decryptdark: #ecdc70;
   }
 
@@ -130,8 +132,15 @@ body {
   h2
   { 
     font-family: 'Zilla Slab', serif;
-    color: var(--midtext);
+    color: var(--bigtext);
     font-size: 1.4em;
+  }
+
+  h3
+  { 
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.6em;
   }
 
   label #cipherTypeLbl {
@@ -315,6 +324,11 @@ select[id="cipherType"] {
   text-align: left;
 }
 
+.col-sm-3.error {
+  justify-content: left;
+  text-align: left;
+}
+
 .row.field {
   margin-bottom: 10px;
 }
@@ -381,4 +395,22 @@ select[id="cipherType"] {
 
 .decryptInput {
   border-color: var(--decrypt);
+}
+
+.col:nth-child(even) {
+  background-color: var(--darkgrey); /* Your color here */
+}
+
+.results:first-child {
+  background-color: var(--darkgrey); /* Your color here */
+}
+
+.container {
+  margin-top: 30px;
+}
+
+.error-message {
+  color: var(--error);
+  font-family: 'Zilla Slab', serif;
+  font-size: 1em;
 }

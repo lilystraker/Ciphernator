@@ -83,6 +83,8 @@
                         <div class = "col-sm-3 field">
                             {{ encryption_form.plaintext }}
                         </div>
+                            <div id = "plaintext-error" class = "error-message">Please enter an 8-bit binary number</div>
+                        
                     </div>
                     
                     <div class="row field">
@@ -92,11 +94,12 @@
                         <div class = "col-sm-3 field">
                             {{ encryption_form.key }}
                         </div>
+                            <div id = "key-error"  class = "error-message">Please enter a 10-bit binary number</div>
                     </div>
                 </div>
                 <input type="hidden" name="form_id" value="encryption" placeholder="encryption">
 
-                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg encryptSubmit" onclick="showForm('encryption')">Encrypt</button>
+                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg encryptSubmit" onclick="showForm('encryption'); validate('encryption');">Encrypt</button>
                 </form>
                 </div>
                 <!-- Decryption form -->
@@ -129,6 +132,7 @@
                         <div class = "col-sm-3 field">
                             {{ decryption_form.ciphertext }}
                         </div>
+                        <div id = "ciphertext-error" class = "error-message">Please enter an 8-bit binary number</div>
                     </div>
                     
                     <div class="row field">
@@ -138,12 +142,14 @@
                         <div class = "col-sm-3 field">
                             {{ decryption_form.key }}
                         </div>
+                        <div id = "keycipher-error"  class = "error-message">Please enter a 10-bit binary number</div>
+
                     </div>
                 </div>
                 <!-- <input value = "chosenCipher">decryption</p> -->
                 <input type="hidden" name="form_id" value="decryption" placeholder="decryption">
 
-                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg decryptSubmit" onclick="showForm('decryption')">Decrypt</button>
+                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg decryptSubmit" onclick="showForm('decryption'); validate('decryption');">Decrypt</button>
              </form>
             </div>
                 <!-- needs to have dynamic text -->
@@ -151,24 +157,43 @@
             </form>
             <div id = "results-container" style="display: block;">
             <!-- Only show when form submitted -->
-
-                <h2>Plaintext</h2>
-                <p>{{ plaintext }}</p> 
-
-                <h2>Key 1</h2>
-                <p>{{ k1 }}</p>
-
-                <h2>Key 2</h2>
-                <p>{{ k2 }}</p> 
-
-                <h2>Ciphertext</h2>
-                <p>{{ ciphertext }}</p> 
-
-                <h2>Input Key</h2>
-                <p>{{ key }}</p> 
-
-
-                
+            <h3>Results</h3>
+                <div class = "container">
+                    <div class = "row results">
+                        <div class = "col">
+                            <h2>Plaintext</h2>
+                        </div>
+                        <div class = "col">                            
+                            <h2>Key 1</h2>
+                        </div>
+                        <div class = "col">
+                            <h2>Key 2</h2>
+                        </div>
+                        <div class = "col">      
+                            <h2>Ciphertext</h2>
+                        </div>
+                        <div class = "col">
+                            <h2>Input Key</h2>
+                        </div>
+                    </div>
+                    <div class = "row results">
+                        <div class = "col">
+                            <p>{{ plaintext }}</p> 
+                        </div>
+                        <div class = "col">                            
+                            <p>{{ k1 }}</p>
+                        </div>
+                        <div class = "col">
+                            <p>{{ k2 }}</p> 
+                        </div>
+                        <div class = "col">      
+                            <p>{{ ciphertext }}</p> 
+                        </div>
+                        <div class = "col">
+                            <p>{{ key }}</p> 
+                        </div>
+                    </div>
+                </div>
                 {% if encryption_form.is_encryption_form %}
                 <p>encryption</p>
                 <!-- <h2>Ciphertext</h2>

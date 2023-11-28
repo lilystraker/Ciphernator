@@ -1,13 +1,10 @@
 
-// document.querySelector('.triangle-button').addEventListener('click', function() {
-// document.getElementById('cipherType').focus() 
-// });
 let form_id = document.getElementById('form_id')
 
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("form");
     var submitBtn = document.getElementById('submitBtn');
-    document.getElementById('results-container').style.display = 'block'; // or 'flex'
+    document.getElementById('results-container').style.display = 'block'; 
     encryptionForm = document.getElementById("encryption-form-placeholder")
     decryptionForm = document.getElementById("decryption-form-placeholder")
 
@@ -20,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     $(".encrypt-button").click(function(){
-        // $(this).classList.add('custom-active');
         $(this).toggleClass("custom-active");
         $(".decrypt-button").removeClass("custom-active")
 
@@ -29,17 +25,18 @@ document.addEventListener("DOMContentLoaded", function() {
     $(".decrypt-button").click(function(){
         $(this).toggleClass("custom-active");
         $(".encrypt-button").removeClass("custom-active")
-        // $(".encrypt-button").toggleClass("active");
     });
 
-    // var plaintext = document.getElementById('plaintext').value;
-    // console.log('Plaintext:', plaintext);
+    var errorMessages = document.querySelectorAll('.error-message');
+
+    errorMessages.forEach(function(errorMessages) {
+        errorMessages.style.display = 'none';
+    });
+
 
     // when submit button clicked
     form.addEventListener('submit', function() {
-        // prevent reload
-        // event.preventDefault()
-        document.getElementById('results-container').style.display = 'block'; // or 'flex'
+        document.getElementById('results-container').style.display = 'block';
       });
 });
 
@@ -75,12 +72,60 @@ function showForm(selectedOption) {
     }
 }
 
+function isInputValid(input, bits) {
+    var regex = new RegExp(`^[01]{${bits}}$`);
+    return regex.test(input);
+}
+
+function validate(type) {
+    
+    var key = document.getElementById('id_key').value;
+
+    // Check the inputs are valid
+
+    if (type == 'encryption') {
+        if (!isInputValid(plaintext, 8)) {
+            // Display error message
+            document.getElementById("plaintext-error").style.display = "block";
+        }
+        if (!isInputValid(key, 10)) {
+            // Display error message
+            document.getElementById("key-error").style.display = "block";
+        }
+    }
+    if (type == 'decryption') {
+        if (!isInputValid(ciphertext, 8)) {
+            // Display error message
+            document.getElementById("ciphertext-error").style.display = "block";
+        }
+
+        if (!isInputValid(key, 10)) {
+            // Display error message
+            document.getElementById("keycipher-error").style.display = "block";
+        }
+    }
+
+}
 document.getElementById('encryption-form-placeholder').addEventListener('submit', function(event) {
-    // event.preventDefault();
 
     var plaintext = document.getElementById('id_plaintext').value;
     var key = document.getElementById('id_key').value;
     this.action += '?form=encryption';
+
+    // Check the inputs are valid
+    if (!isInputValid(plaintext, 8)) {
+        // Display error message
+        document.getElementById("plaintext-error").style.display = "block";
+        // prevent submit
+        event.preventDefault();
+    }
+    if (!isInputValid(key, 10)) {
+        // Display error message
+        document.getElementById("key-error").style.display = "block";
+        // prevent submit
+        event.preventDefault();
+    }
+
 
     // Submit the form using AJAX
     $.ajax({
@@ -92,50 +137,56 @@ document.getElementById('encryption-form-placeholder').addEventListener('submit'
             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
         },
         success: function(response) {
-            // This function runs when the server sends a response
-            // You can use the 'response' variable to access the data sent by the server
-
-            // For example, if the server sends back some HTML to display in the 'resultsContainer':
+            // The server sends back some HTML to display in the 'resultsContainer':
             $('#resultsContainer').html(response);
-
-
         }
     });
 });
 
 document.getElementById('decryption-form-placeholder').addEventListener('submit', function(event) {
-    // event.preventDefault();
 
     var ciphertext = document.getElementById('id_ciphertext').value;
     var key = document.getElementById('id_key').value;
     this.action += '?form=decryption';
 
+    
+    // Check the inputs are valid
+    if (!isInputValid(ciphertext, 8)) {
+        // Display error message
+        document.getElementById("ciphertext-error").style.display = "block";
+        // prevent submit
+        event.preventDefault();
+    }
+    if (!isInputValid(key, 10)) {
+        // Display error message
+        document.getElementById("keycipher-error").style.display = "block";
+        // prevent submit
+        event.preventDefault();
+    }
+
     // Submit the form using AJAX
     $.ajax({
         type: 'POST',
-        url:  $(this).attr('action') + '?form=decryption', // Replace with your actual decryption URL
+        url:  $(this).attr('action') + '?form=decryption', 
         data: {
             'ciphertext': ciphertext,
             'key': key,
             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
         },
         success: function(response) {
-            // This function runs when the server sends a response
-            // You can use the 'response' variable to access the data sent by the server
-
-            // For example, if the server sends back some HTML to display in the 'resultsContainer':
             $('#resultsContainer').html(response);
 
         }
     });
 });
 
+// When a form is submitted, the page will reload and the results will be displayed
 $.ajax({
     type: 'POST',
     url: $(this).attr('action'),
     data: $('#encryption-form-placeholder').serialize(),
     success: function(response) {
-        // Update the DOM with the new values
+        // Update the DOM with the new results
         $('#id_plaintext').text(response.plaintext);
         $('#id_k1').text(response.k1);
         $('#id_k2').text(response.k2);
@@ -143,20 +194,3 @@ $.ajax({
         $('#id_key').text(response.key);
     }
 });
-
-// $.ajax({
-//     type: 'POST',
-//     url:  window.location.href,
-//     data: $('#decryption-form-placeholder').serialize(),
-//     success: function(response) {
-//         // Update the DOM with the new values
-//         $('#id_plaintext').text(response.plaintext);
-//         $('#id_k1').text(response.k1);
-//         $('#id_k2').text(response.k2);
-//         $('#id_ciphertext').text(response.ciphertext);
-//         $('#id_key').text(response.key);
-//         $('#encryption-form-placeholder').hide();
-//         $('#decryption-form-placeholder').show();
-
-//     }
-// });
