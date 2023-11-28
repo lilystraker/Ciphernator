@@ -104,6 +104,7 @@ Website:
 - [ ] When minimising screen, input boxes move out of alignment
 - [ ] Font in selection box won't change
 - [ ] When selecting decryption, the selection box changes back to encryption/the page refreshes and it goes back to encryption
+- [ ] If the user toggles a selection button on, then clicks it again, it toggles out of its active state 
 
 <!-- CONTACT -->
 ## Contact
