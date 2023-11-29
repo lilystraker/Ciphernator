@@ -362,7 +362,7 @@ select[id="cipherType"] {
 
 .encrypt-button:hover {
   background-color: var(--darkaccent);
-  color: var(--background)
+  color: var(--bigtext)
 }
 
 .encrypt-button:active, .encrypt-button.active .encrypt-button.custom-active {
@@ -404,19 +404,39 @@ select[id="cipherType"] {
 }
 
 .col:nth-child(even) {
-  background-color: var(--darkgrey); /* Your color here */
+  background-color: var(--darkgrey); 
 }
 
 .results:first-child {
-  background-color: var(--darkgrey); /* Your color here */
+  background-color: var(--darkgrey); 
 }
 
 .container {
   margin-top: 30px;
+  display: flex;
 }
 
 .error-message {
+  display: inline;
   color: var(--error);
   font-family: 'Arial';
   font-size: 1em;
+}
+
+@media only screen and (max-width: 650px) {
+  /* .col-sm-2, .col, .col-sm-3, .col-sm-4 {    
+    display: block;
+  } */
+  .col-sm-3.lbl {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .col-sm-3.field {
+    text-align: center;
+  }
+
+  #main-container {
+    width: 100%;
+  }
 }

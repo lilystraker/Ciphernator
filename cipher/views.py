@@ -1,5 +1,12 @@
-# myenv\Scripts\activate
-# py manage.py runserver
+# Running program
+    # Windows
+        # myenv\Scripts\activate
+        # py manage.py runserver
+
+    # Mac
+        # Activate venv environment
+        # python3 manage.py runserver
+
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import loader
