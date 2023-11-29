@@ -102,7 +102,8 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: transparent;
+  /* unsure about colour here */
+  background-color: #1c1c1c;
   min-width: 190px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
@@ -306,7 +307,7 @@ select[id="cipherType"] {
 }
 
 
-.row {
+.row.field, .row.cipherTitle {
   display: block;
   justify-content: center;
   text-align: center;
@@ -424,9 +425,16 @@ select[id="cipherType"] {
 }
 
 @media only screen and (max-width: 650px) {
-  /* .col-sm-2, .col, .col-sm-3, .col-sm-4 {    
-    display: block;
-  } */
+
+  h1 {
+    font-size: 3.5rem;
+  }
+  label[for="cipherType"] {
+    font-size: 1.2rem;
+  }
+  .row.results {
+    width: 100%;
+  }
   .col-sm-3.lbl {
     text-align: center;
     margin-left: auto;
@@ -437,6 +445,48 @@ select[id="cipherType"] {
   }
 
   #main-container {
-    width: 100%;
+    width: 90%;
   }
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+ tr th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    display: none;
+  }
+
+  td {
+    /* Behave like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td::before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    /* Label the data */
+    content: attr(data-label);
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.3em;
+    border-right: solid 1px #eee;
+  }
+}
+
+table {
+  width: 100%;
+  background-color: var(--darkgrey);
 }

@@ -40,7 +40,7 @@
         <div id = "main-container">
             <h1>ciphernator</h1>
             <!-- needs to have dynamic text -->
-                <div class="row">
+                <div class="row cipherTitle">
                     <!-- <div class = "col"> -->
                         <label id = "cipherTypeLbl" for = "cipherType">Simplified Data Encryption Standard (S-DES)</label>
                     <!-- </div> -->
@@ -159,40 +159,41 @@
             <!-- Only show when form submitted -->
             <h3>Results</h3>
                 <div class = "container">
-                    <div class = "row results">
-                        <div class = "col">
+                    <table>
+                        <tr>
+                            <th>
                             <h2>Plaintext</h2>
-                        </div>
-                        <div class = "col">                            
+                            </th>       
+                        <th>          
                             <h2>Key 1</h2>
-                        </div>
-                        <div class = "col">
+                        </th>
+                        <th>    
                             <h2>Key 2</h2>
-                        </div>
-                        <div class = "col">      
+                        </th>
+                        <th>
                             <h2>Ciphertext</h2>
-                        </div>
-                        <div class = "col">
+                        </th>
+                        <th>
                             <h2>Input Key</h2>
-                        </div>
-                    </div>
-                    <div class = "row results">
-                        <div class = "col">
+                        </th>
+                        </tr>
+                        <tr>
+                            <td data-label="Plaintext">
                             <p>{{ plaintext }}</p> 
-                        </div>
-                        <div class = "col">                            
+                            </td>
+                            <td data-label = "Key 1">                        
                             <p>{{ k1 }}</p>
-                        </div>
-                        <div class = "col">
+                            </td>
+                            <td data-label = "Key 2">
                             <p>{{ k2 }}</p> 
-                        </div>
-                        <div class = "col">      
+                            </td>
+                            <td data-label = "Ciphertext">
                             <p>{{ ciphertext }}</p> 
-                        </div>
-                        <div class = "col">
+                            </td>
+                            <td data-label = "Input Key">
                             <p>{{ key }}</p> 
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
                 </div>
                 {% if encryption_form.is_encryption_form %}
                 <p>encryption</p>
