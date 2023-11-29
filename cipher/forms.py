@@ -41,6 +41,8 @@ class sdesDecryptionForm(forms.Form):
     max_length=8,
     widget=forms.TextInput(attrs={'class': 'cipherInput decryptInput'}), required=False)
 
+    # TODO
+    # Change all instances of the decryption key to decryptKey to distinguish it from the encryption 'key'
     key = forms.CharField(
     min_length=10,
     max_length=10,
