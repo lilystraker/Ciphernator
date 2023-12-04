@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- needs to have dynamic text -->   
-        <title>S-DES Encryption</title>
+        <title>S-DES Cipher</title>
     </head>
     <body>
 
@@ -145,7 +145,7 @@
                             <label for="{{ decryption_form.key.id_for_label }}">10-Bit Key</label>
                         </div>
                         <div class = "col-sm-3 field">
-                            {{ decryption_form.key }}
+                            {{ decryption_form.cipherkey }}
                         </div>
                         <div id = "keycipher-error"  class = "error-message">Please enter a 10-bit binary number</div>
 
@@ -178,9 +178,9 @@
                         <th>
                             <h2>Ciphertext</h2>
                         </th>
-                        <th>
+                        <!-- <th>
                             <h2>Input Key</h2>
-                        </th>
+                        </th> -->
                         </tr>
                         <tr>
                             <td data-label="Plaintext">
@@ -195,9 +195,9 @@
                             <td data-label = "Ciphertext">
                             <p>{{ ciphertext }}</p> 
                             </td>
-                            <td data-label = "Input Key">
+                            <!-- <td data-label = "Input Key">
                             <p>{{ key }}</p> 
-                            </td>
+                            </td> -->
                         </tr>
                 </div>
                 {% if encryption_form.is_encryption_form %}

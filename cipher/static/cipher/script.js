@@ -94,13 +94,14 @@ function validate(type) {
         }
     }
     if (type == 'decryption') {
-        var ciphertext = document.getElementById('id_plaintext').value;
+        var ciphertext = document.getElementById('id_ciphertext').value;
+        var cipherkey = document.getElementById('id_cipherkey').value;
         if (!isInputValid(ciphertext, 8)) {
             // Display error message
             document.getElementById("ciphertext-error").style.display = "block";
         }
 
-        if (!isInputValid(key, 10)) {
+        if (!isInputValid(cipherkey, 10)) {
             // Display error message
             document.getElementById("keycipher-error").style.display = "block";
         }
@@ -108,7 +109,7 @@ function validate(type) {
 
 }
 document.getElementById('encryption-form-placeholder').addEventListener('submit', function(event) {
-
+    var isEncryptInvalid = false;
     var plaintext = document.getElementById('id_plaintext').value;
     var key = document.getElementById('id_key').value;
     this.action += '?form=encryption';
@@ -119,6 +120,7 @@ document.getElementById('encryption-form-placeholder').addEventListener('submit'
         document.getElementById("plaintext-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+        isEncryptInvalid = true;
     }
     else {
         document.getElementById("plaintext-error").style.display = "none";
@@ -128,6 +130,7 @@ document.getElementById('encryption-form-placeholder').addEventListener('submit'
         document.getElementById("key-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+        isEncryptInvalid = true;
     }
     else {
         document.getElementById("key-error").style.display = "none";
@@ -135,27 +138,30 @@ document.getElementById('encryption-form-placeholder').addEventListener('submit'
 
 
     // Submit the form using AJAX
-    $.ajax({
-        type: 'POST',
-        url:  $(this).attr('action'), 
-        data: {
-            'plaintext': plaintext,
-            'key': key,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        },
-        success: function(response) {
-            // The server sends back some HTML to display in the 'resultsContainer':
-            $('#resultsContainer').html(response);
-        }
-    });
+    if (!isEncryptInvalid) {
+        $.ajax({
+            type: 'POST',
+            url:  $(this).attr('action'), 
+            data: {
+                'plaintext': plaintext,
+                'key': key,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                // The server sends back some HTML to display in the 'resultsContainer':
+                $('#resultsContainer').html(response);
+            }
+        });
+    }
+
 });
 
 document.getElementById('decryption-form-placeholder').addEventListener('submit', function(event) {
 
     var ciphertext = document.getElementById('id_ciphertext').value;
-    var key = document.getElementById('id_key').value;
+    var cipherkey = document.getElementById('id_cipherkey').value;
     this.action += '?form=decryption';
-
+    var isDecryptInvalid = false;
     
     // Check the inputs are valid
     if (!isInputValid(ciphertext, 8)) {
@@ -163,16 +169,18 @@ document.getElementById('decryption-form-placeholder').addEventListener('submit'
         document.getElementById("ciphertext-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+        isDecryptInvalid = true;
     }
     else {
         document.getElementById("ciphertext-error").style.display = "none";
     }
 
-    if (!isInputValid(key, 10)) {
+    if (!isInputValid(cipherkey, 10)) {
         // Display error message
         document.getElementById("keycipher-error").style.display = "block";
         // prevent submit
         event.preventDefault();
+        isDecryptInvalid = true;
     }
     else {
         document.getElementById("keycipher-error").style.display = "none";
@@ -180,32 +188,39 @@ document.getElementById('decryption-form-placeholder').addEventListener('submit'
     }
 
     // Submit the form using AJAX
-    $.ajax({
-        type: 'POST',
-        url:  $(this).attr('action') + '?form=decryption', 
-        data: {
-            'ciphertext': ciphertext,
-            'key': key,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        },
-        success: function(response) {
-            $('#resultsContainer').html(response);
 
-        }
-    });
+    if (!isDecryptInvalid) {
+        $.ajax({
+            type: 'POST',
+            url:  $(this).attr('action') + '?form=decryption', 
+            data: {
+                'ciphertext': ciphertext,
+                'cipherkey': cipherkey,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                $('#resultsContainer').html(response);
+    
+            }
+        });
+    }
+
 });
 
 // When a form is submitted, the page will reload and the results will be displayed
-$.ajax({
-    type: 'POST',
-    url: $(this).attr('action'),
-    data: $('#encryption-form-placeholder').serialize(),
-    success: function(response) {
-        // Update the DOM with the new results
-        $('#id_plaintext').text(response.plaintext);
-        $('#id_k1').text(response.k1);
-        $('#id_k2').text(response.k2);
-        $('#id_ciphertext').text(response.ciphertext);
-        $('#id_key').text(response.key);
-    }
-});
+if (!isEncryptInvalid && !isDecryptInvalid) {
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $('#encryption-form-placeholder').serialize(),
+        success: function(response) {
+            // Update the DOM with the new results
+            $('#id_plaintext').text(response.plaintext);
+            $('#id_k1').text(response.k1);
+            $('#id_k2').text(response.k2);
+            $('#id_ciphertext').text(response.ciphertext);
+            $('#id_key').text(response.key);
+            $('#id_cipherkey').text(response.cipherkey);
+        }
+    });
+}

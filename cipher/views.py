@@ -95,6 +95,7 @@ def cipher(request):
     ciphertext = ""
     plaintext = ""
     key = ""
+    cipherkey = ""
     form = MyForm()
     form_to_display = request.GET.get('form', 'encryption')  # Default to 'encryption' if no parameter is provided
 
@@ -127,21 +128,22 @@ def cipher(request):
 
             if (form_id == 'decryption'):
                 form = decryption_form
-                key = form.cleaned_data['key']
+                cipherkey = form.cleaned_data['cipherkey']
                 ciphertext = form.cleaned_data['ciphertext']
 
                 print(request.POST)
                 print(form.errors)
 
-                keys = generateKey(key)
+                keys = generateKey(cipherkey)
                 k1 = ''.join(keys[0])
                 k2 = ''.join(keys[1])
-                plaintext = ''.join(sdesDecipher(ciphertext, key, keys))
+                plaintext = ''.join(sdesDecipher(ciphertext, cipherkey, keys))
     else:
         print("request.method was not POST")
 
     print("Plaintext: ", plaintext)
     print("Key: ", key)
+    print("Cipherkey: ", cipherkey)
     print("k1: ", k1)
     print("k2: ", k2)
     print("Ciphertext: ", ciphertext)
@@ -149,7 +151,7 @@ def cipher(request):
     return render(request, 'index.html', {
         'encryption_form': encryption_form,
         'decryption_form': decryption_form,
-        'k1' : k1, 'k2' : k2, 'ciphertext': ciphertext, 'plaintext': plaintext, 'key': key,
+        'k1' : k1, 'k2' : k2, 'ciphertext': ciphertext, 'plaintext': plaintext, 'key': key, 'cipherkey': cipherkey,
         'form_to_display': form_to_display,
     })
   
