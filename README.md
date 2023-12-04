@@ -8,7 +8,7 @@
   <a href="(https://github.com/lilystraker/Ciphernator/edit/main/README.md)">
   </a>
 
-  <h3 align="center">Ciphernator</h3>
+<img src = "https://github.com/lilystraker/Ciphernator/blob/fcdb1646d36862612568cf0db3aaee5caf64a9a7/cipher/static/images/ciphernatorTitle.png" alt = "Ciphernator logo">
 
   <p align="center">
     <a href="#">View Demonstration Video</a>
