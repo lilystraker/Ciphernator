@@ -103,8 +103,8 @@ Website:
 
 - [X] When minimising screen, input boxes move out of alignment
 - [X] When selecting decryption, the selection box changes back to encryption/the page refreshes and it goes back to encryption
+- [X] When on a small screen, the table is very small when no outputs are displayed
 - [ ] If the user toggles a selection button on, then clicks it again, it toggles out of its active state 
-- [ ] When on a small screen, the table is very small when no outputs are displayed
 
 <!-- CONTACT -->
 ## Contact

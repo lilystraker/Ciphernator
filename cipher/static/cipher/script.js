@@ -5,7 +5,8 @@ var isDecryptInvalid = false;
 document.addEventListener("DOMContentLoaded", function() {
     var form = document.getElementById("form");
     var submitBtn = document.getElementById('submitBtn');
-    document.getElementById('results-container').style.display = 'block'; 
+    var resultsContainer = document.getElementById('results-container')
+    resultsContainer.style.display  = 'block'; 
     encryptionForm = document.getElementById("encryption-form-placeholder")
     decryptionForm = document.getElementById("decryption-form-placeholder")
 
@@ -17,16 +18,24 @@ document.addEventListener("DOMContentLoaded", function() {
         // show the dercyption form
         decryptionForm.style.display = "block";
         encryptionForm.style.display = "none";
+        resultsContainer.style.display  = 'block'; 
         // change the colour of the results table border
         resultsTable.style.borderColor = "#FDF5BF";
 
-    } else {
+
+    } else if (window.location.href.includes('encryption')) {
         // show the encryption form by default
         encryptionForm.style.display = "block";
         decryptionForm.style.display = "none";
+        resultsContainer.style.display  = 'block'; 
+
         // change the colour of the results table border
         resultsTable.style.borderColor = "#bfb2ff";
-
+    }
+    else {
+        encryptionForm.style.display = "block";
+        decryptionForm.style.display = "none";
+        resultsContainer.style.display  = 'none'; 
     }
 
     $(".encrypt-button").click(function(){
