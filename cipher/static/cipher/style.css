@@ -466,6 +466,8 @@ select[id="cipherType"] {
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
+    font-size: 1.1em;
+
   }
 
   td::before {
@@ -481,12 +483,23 @@ select[id="cipherType"] {
     content: attr(data-label);
     font-family: 'Zilla Slab', serif;
     color: var(--midtext);
-    font-size: 1.3em;
+    font-size: 1.1em;
     border-right: solid 1px #eee;
   }
 }
 
 table {
   width: 100%;
-  background-color: var(--darkgrey);
+  background-color: #1c1c1c;
+  border-radius: 5px;
+  border: 1px solid var(--encrypt);
+}
+
+th {
+  padding-top: 10px;
+  border-bottom: solid 1px white;
+}
+
+td {
+  font-size: 1.2em;
 }
