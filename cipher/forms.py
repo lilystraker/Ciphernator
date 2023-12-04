@@ -1,5 +1,7 @@
 # forms.py
 from django import forms
+from django.core.validators import RegexValidator
+
 
 class MyForm(forms.Form):
 
@@ -22,11 +24,21 @@ class MyForm(forms.Form):
     
 class sdesEncryptionForm(forms.Form):
     plaintext = forms.CharField(
-    min_length=8,
-    max_length=8,
-    widget=forms.TextInput(attrs={'class': 'cipherInput encryptInput'}), required=False)
+        validators=[
+            RegexValidator(
+                regex='^[01]{8}$'  # 8 digit binary number
+            )
+        ],
+        min_length=8,
+        max_length=8,
+        widget=forms.TextInput(attrs={'class': 'cipherInput encryptInput'}), required=False)
 
     key = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex='^[01]{10}$'  # 8 digit binary number
+            )
+        ],
     min_length=10,
     max_length=10,
     widget=forms.TextInput(attrs={'class': 'cipherInput encryptInput'}), required=False)
@@ -37,13 +49,21 @@ class sdesEncryptionForm(forms.Form):
 
 class sdesDecryptionForm(forms.Form):
     ciphertext = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex='^[01]{8}$'  # 8 digit binary number
+            )
+        ],
     min_length=8,
     max_length=8,
     widget=forms.TextInput(attrs={'class': 'cipherInput decryptInput'}), required=False)
 
-    # TODO
-    # Change all instances of the decryption key to decryptKey to distinguish it from the encryption 'key'
     cipherkey = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex='^[01]{10}$'  # 8 digit binary number
+            )
+        ],
     min_length=10,
     max_length=10,
     widget=forms.TextInput(attrs={'class': 'cipherInput decryptInput'}), required=False)
