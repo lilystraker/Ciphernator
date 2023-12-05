@@ -7,6 +7,7 @@
         # Activate venv environment
         # python3 manage.py runserver
 
+import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import loader
@@ -14,6 +15,13 @@ from .forms import MyForm, sdesEncryptionForm, sdesDecryptionForm
 from django.shortcuts import render
 from itertools import permutations
 import re
+
+
+def index(request):
+    r = requests.get('https://httpbin.org/status/418')
+    print(r.text)
+    return HttpResponse('<pre>' + r.text + '</pre>')
+
 
 # @csrf_exempt
 # def encrypt_view(request):
