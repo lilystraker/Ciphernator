@@ -1,5 +1,3 @@
-﻿# Ciphernator
-
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
@@ -11,7 +9,7 @@
 <img src = "https://github.com/lilystraker/Ciphernator/blob/54a21020625bd1620f15de49324871511d08fe6c/cipher/static/images/ciphernatorTitle.png" alt = "Ciphernator logo">
 
   <p align="center">
-    <a href="#">View Demonstration Video</a>
+    <a href="https://ciphernator-ff3eb33a84d8.herokuapp.com/">View Website</a>
   </p>
 </div>
 
