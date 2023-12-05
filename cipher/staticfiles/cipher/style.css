@@ -1,0 +1,505 @@
+/* Define colours */
+:root {
+    /* light blue */
+    --lightaccent: #bfb2ff;
+    /* dark blue */
+    --darkaccent: #7E69E3;
+    /* dark grey */
+    --background: #121212;
+    /* darker grey */
+    --darkgrey: #0c0c0c;
+    /* bright white */
+    --bigtext: rgb(255, 255, 255, 0.95);
+    /* medium white */
+    --midtext: rgb(255, 255, 255, 0.80);
+    /* dim white */
+    --smalltext: rgb(255, 255, 255, 0.60);
+    /* light purple */
+    --encrypt: #bfb2ff;
+    /* light red */
+    --error: #DE6C83;
+    /* pale yellow */
+    --decrypt: #FDF5BF;
+    /* yellow */
+    --decryptdark: #ecdc70;
+  }
+
+body {
+    background-color: var(--background);
+    /* font-size: 13px; */
+    color: var(--midtext);
+}
+
+/* Navigation bar */
+.navigation {
+    top: 0px;
+    left: 0px; 
+    width: 100%;
+    /* stick to top of screen */
+      position: fixed;
+      background-color: var(--background);
+    /* appear in front of content */
+      z-index: 1;
+    /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); */
+  }
+  
+  .navigation ul {
+    list-style: none;
+    padding: 0;
+  
+  }
+
+  .navigation li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+  /* Navigation links */
+  .nav-link {
+    text-align: center;
+    padding: 10px;
+    padding-right: 25px;
+    color: var(--midtext);
+    font-family: 'Zilla Slab', serif;
+    font-size: 1.5em;
+    font-weight: 500;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .navigation a {
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--lightaccent);
+    transition-duration: 0.35s;
+  }
+
+  .nav-link-dropdown {
+    color: var(--midtext);
+    font-size: 1.3em;
+    font-weight: 400;
+    font-family: 'Zilla Slab', serif;
+    padding: 10px;
+  }
+
+  .dropdown:hover .nav-link {
+    color: var(--lightaccent);
+  }
+
+  .nav-link-dropdown:hover {
+    color: var(--darkaccent);
+    transition-duration: 0.35s;
+  }
+
+  /* Styles for the dropdown menu */
+.dropdown:hover .dropdown-content {
+  transition-duration: 0.2s;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  /* unsure about colour here */
+  background-color: #1c1c1c;
+  min-width: 190px;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+}
+
+.dropdown-content li {
+  padding: 10px;
+}
+
+  /* Main content */
+  #main-container { 
+    width: 60%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Font */
+
+  h1 {
+    font-family: 'Abril Fatface', serif;
+    color: var(--lightaccent);
+    font-size: 5em;
+  }
+
+  h2
+  { 
+    font-family: 'Zilla Slab', serif;
+    color: var(--bigtext);
+    font-size: 1.4em;
+  }
+
+  h3
+  { 
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.6em;
+  }
+
+  label #cipherTypeLbl {
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.4em;
+    width: 100%;
+  }
+
+  p {
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.2em;
+  }
+  
+  .btn-primary {
+    background-color: var(--lightaccent);
+    color: var(--background);
+    font-family: 'Zilla Slab', serif;
+  }
+
+  .decryptSubmit {
+    background-color: var(--decrypt); 
+  }
+
+  .decryptSubmit:hover {
+    background-color: var(--decryptdark) !important;
+    transition-duration: 0.35s !important;
+    color: var(--background) !important;
+  }
+
+  .encryptSubmit:hover {
+    background-color: var(--darkaccent) !important;
+    transition-duration: 0.35s !important;
+  }
+
+  .encryptSubmit:focus, .encryptSubmit:active {
+    background-color: var(--darkaccent) !important;
+  }
+
+  .decryptSubmit:focus, .decryptSubmit:active {
+    background-color: var(--decryptdark) !important;
+  }
+
+
+  form {
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+
+  .cipherInput {
+    font-size: 1.2em;
+    /* height: 30px; */
+    width: 150px;
+    background-color: var(--darkgrey);
+    color: var(--midtext);
+    border-radius: 10%;
+    border: 2px solid white;
+    padding: 5px;
+  }
+
+  label {
+    font-size: 1.2em;
+    font-family: 'Zilla Slab', serif;
+    padding: 10px;
+  }
+
+  .triangle-button {
+    position: relative;
+    background-color: var(--background); 
+    /* Background color of the button */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 35px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+select {
+  appearance: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 110%;
+}
+
+#select-button {
+  position: absolute;
+  top: -3px;
+  right: -40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+label[for="cipherType"] {
+  font-family: 'Zilla Slab', serif;
+  color: var(--midtext);
+  font-size: 1.3em;
+  padding: 10px;
+}
+
+select option {
+  font-family: 'Zilla Slab', serif;
+  color: var(--midtext);
+  font-size: 1em;
+}
+
+select[id="cipherType"] {
+  font-family: 'Zilla Slab', serif;
+  font-weight: 500;
+  background-color: var(--darkgrey);
+  color: var(--midtext);
+  font-size: 1.3em;
+  padding: 8px;
+  border-radius: 10%;
+  border: 2px solid white;
+  /* text-align: center; */
+  cursor: pointer;
+}
+.cipherInput {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.cipherInput:focus, select:focus {
+  transition-duration: 0.25s;
+  border: 2px solid var(--lightaccent);
+}
+
+.triangle-button {
+  background-color: transparent; /* Background color of the button */
+  color: var(--lightaccent); /* Text color */
+  border: none;
+  font-size: 25px; /* Adjust font size as needed */
+  cursor: pointer;
+}
+
+.triangle-button:hover {
+  transition-duration: 0.35s;
+  color: var(--darkaccent);
+}
+
+#select-container {
+  display: flex;
+  text-align: center;
+  position: absolute; /* Position the inner container */
+  /* transform: translate(-50%, -50%);  */
+  align-items: center;
+}
+
+#select-field {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+.row.field, .row.cipherTitle {
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.col-sm-2, .col, .col-sm-3, .col-sm-4 {
+  display: inline-block
+}
+
+.col-sm-3.lbl {
+  justify-content: right;
+  text-align: right;
+}
+.col {
+  width: 175px;
+}
+
+.col-sm-3.field {
+  justify-content: left;
+  text-align: left;
+}
+
+.col-sm-3.error {
+  justify-content: left;
+  text-align: left;
+}
+
+.row.field {
+  margin-bottom: 50px;
+  
+}
+
+.row.selectBox {
+  margin-bottom: 30px;
+}
+
+.flex-container {
+  margin-top: 30px;
+}
+
+#results-container {
+  margin-bottom: 100px;
+}
+
+.tablinks {
+  font-family: 'Zilla Slab', serif;
+}
+
+.encrypt-button {
+  border-color: var(--encrypt);
+  color: var(--midtext);
+}
+
+.encrypt-button:hover {
+  background-color: var(--darkaccent);
+  color: var(--bigtext)
+}
+
+.encrypt-button:active, .encrypt-button.active .encrypt-button.custom-active {
+  background-color: var(--encrypt) !important;
+  color: var(--background) !important;
+}
+
+.encrypt-button.custom-active, .encrypt-button:focus {
+  background-color: var(--encrypt) !important;
+  color: var(--background) !important;
+}
+
+.decrypt-button {
+  border-color: var(--decrypt);
+  color: var(--midtext);
+}
+
+.decrypt-button:hover {
+  background-color: var(--decryptdark);
+  color: var(--background)
+}
+
+.decrypt-button:active, .decrypt-button.active .decrypt-button.custom-active  {
+  background-color: var(--decrypt) !important;
+  color: var(--background) !important;
+}
+
+.decrypt-button.custom-active, .decrypt-button:focus{
+  background-color: var(--decrypt) !important;
+  color: var(--background) !important;
+}
+
+.encryptInput {
+  border-color: var(--encrypt);
+}
+
+.decryptInput {
+  border-color: var(--decrypt);
+}
+
+.col:nth-child(even) {
+  background-color: var(--darkgrey); 
+}
+
+.results:first-child {
+  background-color: var(--darkgrey); 
+}
+
+.container {
+  margin-top: 30px;
+  display: flex;
+}
+
+.error-message {
+  display: inline;
+  color: var(--error);
+  font-family: 'Arial';
+  font-size: 1em;
+}
+
+@media only screen and (max-width: 650px) {
+
+  h1 {
+    font-size: 3.5rem;
+  }
+  label[for="cipherType"] {
+    font-size: 1.2rem;
+  }
+  .row.results {
+    width: 100%;
+  }
+  .col-sm-3.lbl {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .col-sm-3.field {
+    text-align: center;
+  }
+
+  #main-container {
+    width: 90%;
+  }
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+ tr th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    display: none;
+  }
+
+  td {
+    /* Behave like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    font-size: 1.1em;
+
+  }
+
+  td::before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    /* Label the data */
+    content: attr(data-label);
+    font-family: 'Zilla Slab', serif;
+    color: var(--midtext);
+    font-size: 1.1em;
+    border-right: solid 1px #eee;
+  }
+}
+
+table {
+  width: 100%;
+  background-color: #1c1c1c;
+  border-radius: 5px;
+  border: 1px solid var(--encrypt);
+}
+
+th {
+  padding-top: 10px;
+  border-bottom: solid 1px white;
+}
+
+td {
+  font-size: 1.2em;
+}
