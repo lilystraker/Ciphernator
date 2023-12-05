@@ -94,7 +94,8 @@ Website:
   - [X] Allow user to input plaintext and key
   - [X] Display encryption and decryption form based on user selected type
   - [X] Display results box with input key, plaintext, ciphertext, K1, and K2
-  - [ ] Perform testing
+  - [X] Perform testing
+  - [ ] Add information box about how the cipher works
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
