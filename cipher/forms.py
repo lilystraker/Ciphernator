@@ -70,3 +70,30 @@ class sdesDecryptionForm(forms.Form):
 
     form_id = forms.CharField(
         widget=forms.HiddenInput(), required=False)
+    
+
+    
+class dheForm(forms.Form):
+    primitive_root = forms.CharField(
+        # validators=[
+        #     RegexValidator(
+        #         regex='^[01]{8}$'  # 8 digit binary number
+        #     )
+        # ],
+        min_length=5,
+        max_length=5,
+        widget=forms.TextInput(attrs={'class': 'cipherInput encryptInput'}), required=False)
+
+    generator = forms.CharField(
+        # validators=[
+        #     RegexValidator(
+        #         regex='^[01]{10}$'  # 8 digit binary number
+        #     )
+        # ],
+    min_length=3,
+    max_length=3,
+    widget=forms.TextInput(attrs={'class': 'cipherInput encryptInput'}), required=False)
+
+    form_id = forms.CharField(
+        widget=forms.HiddenInput(), required=False)
+    

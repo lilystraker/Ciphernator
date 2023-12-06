@@ -1,7 +1,4 @@
-# Lily Straker
-# 22052506
-# INFO3006 - Information Security
-# Practical Assignment - Task Two - Diffie-Helman Key Exchange Algorithmss
+# === DHE - Diffie-Helman Exchange === #
 
 import random
 from math import gcd
