@@ -51,14 +51,15 @@ body {
 
   .navigation li {
     display: inline-block;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
   /* Navigation links */
   .nav-link {
     text-align: center;
-    padding: 10px;
-    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
     color: var(--midtext);
     font-family: 'Zilla Slab', serif;
     font-size: 1.5em;
@@ -105,6 +106,8 @@ body {
   /* unsure about colour here */
   background-color: #1c1c1c;
   min-width: 190px;
+  border: 1px solid var(--encrypt);
+  border-radius: 5px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
 
