@@ -164,9 +164,6 @@ def cipher(request):
         'form_to_display': form_to_display,
     })
   
-
-
-
 def dhe(request):
     primitive_root = ""
     generator = ""
@@ -175,4 +172,6 @@ def dhe(request):
         'dhe_form': form,
         'primitive_root' : primitive_root, 'generator' : generator,
     })
-  
+
+def contact(request):
+    return render(request, 'contact.html')
