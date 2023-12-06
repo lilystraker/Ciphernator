@@ -508,3 +508,47 @@ th {
 td {
   font-size: 1.2em;
 }
+
+/* GitHub, LinkedIn images */
+.contacts-images {
+	max-width: 10%;
+	min-width: 40px;
+	height: auto;
+	margin: 6px;
+  display: inline-block;
+}
+
+.contacts-images:hover {
+	opacity: 0.5;	
+}
+
+#contacts-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#contacts-header {
+  text-align: center;
+}
+
+#contacts-content {
+  text-align: center;
+}
+
+a {
+  color: var(--lightaccent);
+}
+
+a:hover {
+  color: var(--darkaccent);
+  text-decoration: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
