@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     resultsTable = document.getElementById("results-table")
 
-
-
     if (window.location.href.includes('decryption')) {
         // show the dercyption form
         decryptionForm.style.display = "block";
@@ -21,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
         resultsContainer.style.display  = 'block'; 
         // change the colour of the results table border
         resultsTable.style.borderColor = "#FDF5BF";
+        // toggle decryption selection button
+        $(".decrypt-button").toggleClass("custom-active");
+        $(".encrypt-button").removeClass("custom-active")
 
 
     } else if (window.location.href.includes('encryption')) {
@@ -31,11 +32,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // change the colour of the results table border
         resultsTable.style.borderColor = "#bfb2ff";
+
+        // toggle encryption selection button
+        $(".encrypt-button").toggleClass("custom-active");
+        $(".decrypt-button").removeClass("custom-active")
     }
+    // show encryption form by default
     else {
         encryptionForm.style.display = "block";
         decryptionForm.style.display = "none";
-        resultsContainer.style.display  = 'none'; 
+        resultsContainer.style.display  = 'none';
+
+        // toggle encryption selection button 
+        $(".encrypt-button").toggleClass("custom-active");
+        $(".decrypt-button").removeClass("custom-active")
     }
 
     $(".encrypt-button").click(function(){
@@ -48,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
         $(this).toggleClass("custom-active");
         $(".encrypt-button").removeClass("custom-active")
     });
+
 
     var errorMessages = document.querySelectorAll('.error-message');
 
