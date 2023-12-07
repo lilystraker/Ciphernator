@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- My CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'cipher/style.css' %}">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="path/to/bootstrap.min.css">
+
+        <!-- Google Fonts  -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Zilla+Slab:ital,wght@0,300;0,500;0,600;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'cipher_favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'cipher_favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'cipher_favicon/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'cipher_favicon/site.webmanifest' %}">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- needs to have dynamic text -->   
+        <title>Contact - Ciphernator</title>
+    </head>
+    <body>
+
+        <div class = "navigation">
+                <!-- show drop down list of all cipher links -->
+                <li class="dropdown">
+                    <a class = "nav-link" href = "#">Ciphers</a>
+                    <ul class="dropdown-content">
+                        <li><a class = "nav-link-dropdown" href="index.html">S-DES</a></li>
+                        <li><a class = "nav-link-dropdown" href="dhe.html">Diffie-Helman</a></li>
+                        <!-- <li><a class = "nav-link-dropdown" href="#">RSA</a></li> -->
+                    </ul>
+                </li>
+            <li><a class = "nav-link" href = "contact.html">Contact</a></li>
+        </div>
+
+        <div id = "main-container">
+            <h1>Lily Straker</h1>
+            <div id = "contacts-container">
+            <div id = "contacts-header">
+                <a href = "https://github.com/lilystraker"><img src = "{% static 'images/github-white.png' %}" alt = "GitHub logo" width = "50" height = "50" class = "contacts-images"><h2>GitHub</h2></a>
+            </div>
+                <div id = "contacts-content">
+                    <p>Share your feedback on the <a href = "https://github.com/lilystraker/Ciphernator#readme">GitHub repo</a> or <a href = "https://github.com/lilystraker">follow me</a> to stay up to date on the project</p><br>
+                </div>
+                <div id = "contacts-header">
+                    <a href = "https://www.linkedin.com/in/lilystraker/"><img src = "{% static 'images/linkedin.png' %}" alt = "LinkedIn logo" class = "contacts-images" width = "50" height = "50"><h2>LinkedIn</h2></a>
+                </div>
+                <div id = "contacts-content">
+                    <p>Reach out to me at <a href = "https://www.linkedin.com/in/lilystraker/">linkedin.com/lilystraker</a></p><br>
+                </div>
+                <span class="material-symbols-outlined" style="font-size:50px;">
+                    mail
+                    </span>
+                <div id = "contacts-header">
+                    <h2>Email</h2>
+                </div>
+                <div id = "contacts-content">
+                    <p>Contact me at lilystraker1@gmail.com</p>
+                </div>
+            </div>
+        </div>
+            <!-- My JS -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="{% static 'cipher/script.js' %}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3B1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    </body>
+
+</html>

@@ -25,7 +25,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- needs to have dynamic text -->   
-        <title>S-DES Cipher</title>
+        <title>Diffie-Helman Exchange Cipher</title>
     </head>
     <body>
 
@@ -47,7 +47,7 @@
             <!-- needs to have dynamic text -->
                 <div class="row cipherTitle">
                     <!-- <div class = "col"> -->
-                        <label id = "cipherTypeLbl" for = "cipherType">Simplified Data Encryption Standard (S-DES)</label>
+                        <label id = "cipherTypeLbl" for = "cipherType">Diffie-Helman Exchange</label>
                     <!-- </div> -->
                 </div>
                 
@@ -58,7 +58,7 @@
 
             <div class="tab">
                 <button name = "cipherButton" value = "encryption" type="button" class="btn btn-outline-primary btn-lg tablinks encrypt-button" onclick="showForm('encryption')">Encryption</button>
-                <button name = "cipherButton" value = "decryption" type="button" class="btn btn-outline-primary btn-lg tablinks decrypt-button" onclick="showForm('decryption')">Decryption</button>
+                <!-- <button name = "cipherButton" value = "decryption" type="button" class="btn btn-outline-primary btn-lg tablinks decrypt-button" onclick="showForm('decryption')">Decryption</button> -->
             </div>
                <div id="encryption-form-placeholder">
                 <form method="post" id = "form" action="?form=encryption">
@@ -83,81 +83,52 @@
                     
                     <div class="row field">
                         <div class = "col-sm-3 lbl">
-                            <label for="{{ encryption_form.plaintext.id_for_label }}">8-Bit Plaintext</label>
+                            <label for="{{ dhe_form.prime_modulus.id_for_label }}">Prime Modulus</label>
                         </div>
                         <div class = "col-sm-3 field">
-                            {{ encryption_form.plaintext }}
+                            {{ dhe_form.prime_modulus }}
                         </div>
-                            <div id = "plaintext-error" class = "error-message">Please enter an 8-bit binary number</div>
+                            <div id = "prime-modulus-error" class = "error-message">Please enter a valid integer</div>
                         
                     </div>
                     
                     <div class="row field">
                         <div class = "col-sm-3 lbl">
-                            <label for="{{ encryption_form.key.id_for_label }}">10-Bit Key</label>
+                            <label for="{{ dhe_form.generator.id_for_label }}">Generator</label>
                         </div>
                         <div class = "col-sm-3 field">
-                            {{ encryption_form.key }}
+                            {{ dhe_form.generator }}
                         </div>
-                            <div id = "key-error"  class = "error-message">Please enter a 10-bit binary number</div>
+                            <div id = "generator-error"  class = "error-message">Please enter a valid integer</div>
                     </div>
+
+                                        
+                    <div class="row field">
+                        <div class = "col-sm-3 lbl">
+                            <label for="{{ dhe_form.xa.id_for_label }}">User A's Private Number</label>
+                        </div>
+                        <div class = "col-sm-3 field">
+                            {{ dhe_form.xa }}
+                        </div>
+                            <div id = "xa-error"  class = "error-message">Please enter a valid integer</div>
+                    </div>
+
+                                        
+                    <div class="row field">
+                        <div class = "col-sm-3 lbl">
+                            <label for="{{ dhe_form.xb.id_for_label }}">User B's Private Number</label>
+                        </div>
+                        <div class = "col-sm-3 field">
+                            {{ dhe_form.xb }}
+                        </div>
+                            <div id = "xb-error"  class = "error-message">Please enter a valid integer</div>
+                    </div>
+
                 </div>
                 <input type="hidden" name="form_id" value="encryption" placeholder="encryption">
 
-                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg encryptSubmit" onclick="showForm('encryption'); validate('encryption');">Encrypt</button>
-                </form>
+                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg encryptSubmit">Encrypt</button>
                 </div>
-                <!-- Decryption form -->
-                <div id="decryption-form-placeholder">
-                <form method="post" id = "form"  action="?form=decryption">
-                {% csrf_token %}
-                
-                <!-- <div class = "row">
-                    <div class = "col">
-                         -->
-
-                        <!-- <div id = "custom-select"> -->
-                            <!-- <select name = "cipherType" id = "cipherType">
-                                <option value="" disabled selected>Select an option</option>
-                                <option id = "cipherTypes" value="encryption">Encryption</option>
-                                <option id = "cipherTypes" value="decryption">Decryption</option>
-                            </select> -->
-
-                            <!-- display triangle symbol -->
-                            <!-- <button class="triangle-button" id = "select-button">&#9660;</button> -->
-                        <!-- </div> -->
-                    <!-- </div>
-                </div> -->
-
-                <div class = "flex-container">
-                    <div class="row field">
-                        <div class = "col-sm-3 lbl">
-                            <label for="{{ decryption_form.ciphertext.id_for_label }}">8-Bit Ciphertext</label>
-                        </div>
-                        <div class = "col-sm-3 field">
-                            {{ decryption_form.ciphertext }}
-                        </div>
-                        <div id = "ciphertext-error" class = "error-message">Please enter an 8-bit binary number</div>
-                    </div>
-                    
-                    <div class="row field">
-                        <div class = "col-sm-3 lbl">
-                            <label for="{{ decryption_form.key.id_for_label }}">10-Bit Key</label>
-                        </div>
-                        <div class = "col-sm-3 field">
-                            {{ decryption_form.cipherkey }}
-                        </div>
-                        <div id = "keycipher-error"  class = "error-message">Please enter a 10-bit binary number</div>
-
-                    </div>
-                </div>
-                <!-- <input value = "chosenCipher">decryption</p> -->
-                <input type="hidden" name="form_id" value="decryption" placeholder="decryption">
-
-                <button type="submit" id = "submitBtn" type="button" class="btn btn-primary submitBtn btn-lg decryptSubmit" onclick="showForm('decryption'); validate('decryption');">Decrypt</button>
-             </form>
-            </div>
-                <!-- needs to have dynamic text -->
                 
             </form>
             <div id = "results-container" style="display: block;">
@@ -167,37 +138,29 @@
                     <table id = "results-table">
                         <tr>
                             <th>
-                            <h2>Plaintext</h2>
+                            <h2>y<sub>A</sub></h2>
                             </th>       
                         <th>          
-                            <h2>Key 1</h2>
+                            <h2>y<sub>B</sub></h2>
                         </th>
                         <th>    
-                            <h2>Key 2</h2>
-                        </th>
-                        <th>
-                            <h2>Ciphertext</h2>
+                            <h2>Key</h2>
                         </th>
                         <!-- <th>
                             <h2>Input Key</h2>
                         </th> -->
                         </tr>
                         <tr>
-                            <td data-label="Plaintext">
-                            <p>{{ plaintext }}</p> 
+                            <td data-label="yA">
+                            <p>{{ ya }}</p> 
                             </td>
-                            <td data-label = "Key 1">                        
-                            <p>{{ k1 }}</p>
+                            <td data-label = "yB">                        
+                            <p>{{ yb }}</p>
                             </td>
-                            <td data-label = "Key 2">
-                            <p>{{ k2 }}</p> 
+                            <td data-label = "Key">
+                            <p>{{ k1 }}</p> 
                             </td>
-                            <td data-label = "Ciphertext">
-                            <p>{{ ciphertext }}</p> 
-                            </td>
-                            <!-- <td data-label = "Input Key">
-                            <p>{{ key }}</p> 
-                            </td> -->
+
                         </tr>
                 </div>
                 {% if encryption_form.is_encryption_form %}
@@ -212,7 +175,7 @@
     
             <!-- My JS -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="{% static 'cipher/script.js' %}"></script>
+            <script src="{% static 'cipher/dheScript.js' %}"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3B1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 

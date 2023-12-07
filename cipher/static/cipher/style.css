@@ -51,14 +51,15 @@ body {
 
   .navigation li {
     display: inline-block;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
   /* Navigation links */
   .nav-link {
     text-align: center;
-    padding: 10px;
-    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
     color: var(--midtext);
     font-family: 'Zilla Slab', serif;
     font-size: 1.5em;
@@ -105,6 +106,8 @@ body {
   /* unsure about colour here */
   background-color: #1c1c1c;
   min-width: 190px;
+  border: 1px solid var(--encrypt);
+  border-radius: 5px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
 }
 
@@ -190,6 +193,7 @@ body {
   form {
     margin-top: 30px;
     margin-bottom: 50px;
+    position:relative;
   }
 
   .cipherInput {
@@ -336,7 +340,7 @@ select[id="cipherType"] {
 }
 
 .row.field {
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   
 }
 
@@ -422,6 +426,9 @@ select[id="cipherType"] {
   color: var(--error);
   font-family: 'Arial';
   font-size: 1em;
+  left: 30%;
+  position: absolute;
+
 }
 
 @media only screen and (max-width: 650px) {
@@ -489,6 +496,8 @@ select[id="cipherType"] {
 }
 
 table {
+  border-collapse: separate;
+
   width: 100%;
   background-color: #1c1c1c;
   border-radius: 5px;
@@ -502,4 +511,48 @@ th {
 
 td {
   font-size: 1.2em;
+}
+
+/* GitHub, LinkedIn images */
+.contacts-images {
+	max-width: 10%;
+	min-width: 40px;
+	height: auto;
+	margin: 6px;
+  display: inline-block;
+}
+
+.contacts-images:hover {
+	opacity: 0.5;	
+}
+
+#contacts-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#contacts-header {
+  text-align: center;
+}
+
+#contacts-content {
+  text-align: center;
+}
+
+a {
+  color: var(--lightaccent);
+}
+
+a:hover {
+  color: var(--darkaccent);
+  text-decoration: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }

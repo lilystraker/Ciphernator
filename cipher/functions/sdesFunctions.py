@@ -1,11 +1,7 @@
-# Lily Straker
-# 22052506
-# INFO3006 - Information Security
-# Practical Assignment - Task One - S-DES Encryption and Decryption
+# === SDES === 
+    # Code to encrypt and decrypt plaintext using S-DES
 
-import re
 # All permutation and s matrixes defined
-
 p10_list = [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
 ip_list = [2, 6, 3, 1, 4, 8, 5, 7]
 inverse_ip_list = [4, 1, 3, 5, 7, 2, 8, 6]
@@ -77,7 +73,6 @@ def generateKey(key):
 
 def exclusiveOr(binary1, binary2):
     """ Perform an XOR operation on two binary numbers """
-
     XOR_result = []
     # Go through each number in both binary numbers
     # If the numbers match, add a 0 to the resulting array
@@ -176,9 +171,7 @@ def sdesEncryption(plaintext, key, keys):
     # Find IP-1
     inverse_ip = permutate(result, inverse_ip_list)
 
-    # Print all inputs and outputs
-    printOutput(plaintext, inverse_ip, key, keys)
-
+    return inverse_ip
 
 def sdesDecipher(ciphertext, key, keys):
     """S-DES Decryption function using input ciphertext and input key"""
@@ -227,128 +220,4 @@ def sdesDecipher(ciphertext, key, keys):
     # Use inverse IP permutation on this result 
     IP = permutate(new_result, inverse_ip_list)
 
-    # Print results
-    printOutput(''.join(IP), ciphertext, key, keys)
-
-def checkInput(input, regex):
-    """ Check the validity of input values using regex """
-    return bool(re.match(regex, input))
-
-def printOutput(plaintext, ciphertext, key, keys):
-    """ Print all inputs and outputs to console """
-    print("\nOutputs:")
-    print("\tKey:\n\t\t", key)
-    print("\tPlaintext:\n\t\t", plaintext)
-    # Convert K1, K2, and ciphertext from list to string
-    print("\tK1:\n\t\t", ''.join(keys[0]))
-    print("\tK2:\n\t\t", ''.join(keys[1]))
-    print("\tCiphertext:\n\t\t", ''.join(ciphertext))
-
-    # Condensed printing output used for testing  
-    # print("Key:", key, "Plaintext:", plaintext, "K1:", ''.join(keys[0]), "K2:", ''.join(keys[1]), "Ciphertext:", ''.join(ciphertext))
-
-
-def main():
-    """ Show menu when program begins """
-
-    print("S-DES Cipher Encryption and Decryption\n")
-    cipherChosen = False
-    # Wait for user to select encryption or decryption option
-    while (cipherChosen == False):
-        print("Input 'x' to exit\n")
-        cipher = input("Encrypt (e) or Decrypt (d)?\n")
-        keyValid = False
-        plaintextValid = False
-        
-        # Encrpytion selected
-        if (cipher.lower() == 'e'):
-            # Check the user has inputted a valid 10-bit binary value
-            while (keyValid == False):
-                key = input("Enter a 10-bit key\n")
-                # Define regex for 10-bit binary number
-                keyValid = checkInput(key, "^[0-1]{10}$")
-                # If input is valid, generate the keys 
-                if (keyValid):
-                    keys = generateKey(key)
-                    cipherChosen = True
-                # If user wants to exit program, then quit 
-                elif (key == 'x'):
-                    print("Quitting program.")
-                    cipherChosen = True
-                    plaintextValid = True
-                    break
-                # If user enters an invalid input
-                else:
-                    print("Please enter a valid 10-bit key in binary")
-            
-            # Prompt user for input plaintext
-            while (plaintextValid == False):
-                plaintext = input("Enter an 8-bit plaintext\n")
-                # Check user has inputted a valid 8-bit binary number
-                plaintextValid = checkInput(plaintext, "^[0-1]{8}$")
-                # If input is valid, perform encryption 
-                if (plaintextValid):
-                    cipherChosen = True
-                    sdesEncryption(plaintext, key, keys)
-                # Quit program
-                elif (plaintext == 'x'):
-                    print("Quitting program.")
-                    cipherChosen = True
-                    plaintextValid = True
-                    break
-                # If input is invalid, prompt user again
-                else:
-                    print("Please enter a valid 8-bit plaintext in binary")
-        # Decryption selected
-        elif (cipher.lower() == 'd'):
-            keyValid = False
-            ciphertextValid = False
-            # Prompt user for key
-            while (keyValid == False):
-                key = input("Enter a 10-bit key\n")
-                # Check input is valid
-                keyValid = checkInput(key, "^[0-1]{10}$")
-                # If it is valid, generate keys
-                if (keyValid):
-                    keys = generateKey(key)
-                    cipherChosen = True
-                # Quit program 
-                elif (key == 'x'):
-                    print("Quitting program.")
-                    cipherChosen = True
-                    ciphertextValid = True
-                    break
-                # If input is invalid, prompt user for another key
-                else:
-                    print("Please enter a valid 10-bit key in binary")
-            # Prompt user for ciphertext
-            while (ciphertextValid == False):
-                ciphertext = input("Enter an 8-bit ciphertext\n")
-                # Check ciphertext is valid 8-bit binary value
-                ciphertextValid = checkInput(ciphertext, "^[0-1]{8}$")
-                # If input is valid, decrypt the ciphertext
-                if (ciphertextValid):
-                    cipherChosen = True
-                    sdesDecipher(ciphertext, key, keys)
-                # Quit program
-                elif (ciphertext == 'x'):
-                    print("Quitting program.")
-                    cipherChosen = True
-                    ciphertextValid = True
-                    break
-                # Prompt user for another ciphertext if invalid
-                else:
-                    print("Please enter a valid 8-bit ciphertext in binary")
-        # Quit program
-        elif (cipher.lower() == 'x'):
-            print("Quitting program.")
-            cipherChosen = True
-        # If user enters any other character, prompt them to select the cipher again
-        else:
-            print("Please enter 'e' or 'd'")
-
-# Run the program
-main()
-
-
-
+    return IP
