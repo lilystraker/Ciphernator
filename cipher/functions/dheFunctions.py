@@ -7,8 +7,11 @@ import math
 def is_primitive_root(g, n):
     """ Find out if g is a primitive root of n """
 
-    # If the greatest common denominator between g and n is NOT 1, then g is not a primtive root 
+    # If the greatest common denominator between g and n is NOT 1, then g is not a primitive root 
     if gcd(g, n) != 1:
+        return False
+    
+    if g > n:
         return False
     
     # Euler's totient function for n
@@ -199,6 +202,7 @@ def main():
                     else:
                         print("That is not a valid primitive root of", p)
             
+<<<<<<< Updated upstream
             while(not(xaIsValid) and not(canProgramExit)):
                 # Prompt user for xA
                 xa = input("Enter first private random number\n")
@@ -253,3 +257,70 @@ def main():
             calculateOutputs(p, g, xa, xb)
 
 main()
+=======
+#             while(not(xaIsValid) and not(canProgramExit)):
+#                 # Prompt user for xA
+#                 xa = input("Enter first private random number\n")
+#                 if xa.lower() == 'x':
+#                     canProgramExit = True
+#                     break
+#                 # Check xA is an integer
+#                 elif (isInt(xa)):
+#                     xa = int(xa)
+#                     # Check xA lies within range of 1 < xA < p
+#                     if (xa > 1 and xa < p ):
+#                         xaIsValid = True
+
+#             while(not(xbIsValid) and not(canProgramExit)):
+#                 # Prompt user for second number xB
+#                 xb = input("Enter second private random number\n")
+#                 if xb.lower() == 'x':
+#                     canProgramExit = True
+#                     break
+#                 # Check xB is an integer
+#                 elif (isInt(xb)):
+#                     xb = int(xb)
+#                     # Check xB lies within range of 1 < xB < p
+#                     if (xb > 1 and xb < p ):
+#                         xbIsValid = True
+#             # Exit program
+#             if canProgramExit:
+#                 break 
+
+#             # Calculate and print all outputs
+#             calculateOutputs(p, g, xa, xb)
+
+#         # Auto input chosen
+#         elif (isAuto):
+#             pIsValid = False
+#             # Keep randomly generating a number for p until a valid prime number is found
+#             while (not(pIsValid)):
+#                 p = randomGeneration()
+#                 pIsValid = isPrime(p)
+#             # Generate all primitive roots of p
+#             primitive_roots_list = primitive_roots(p)
+#             # Randomly choose an index within the primitive roots list
+#             n = randomGeneration(0, len(primitive_roots_list) - 1)
+#             g = primitive_roots_list[n]
+#             # Randomly generate a private number xA such that 1 < xA < p
+#             xa = randomGeneration(2, p-1)
+#             # Randomly generate a private number xB such that 1 < xB < p
+#             xb = randomGeneration(2, p-1)
+#             # Print inputs
+#             print("p: %d\ng: %d\nxa: %d\nxb: %d" % (p, g, xa, xb))
+#             # Calculate and print outputs
+#             calculateOutputs(p, g, xa, xb)
+
+# main()
+
+def dheProgram(p, g, xa, xb):
+    # when user has submitted a prime modulus, generate all primitive roots that can be used as the generator 
+    calculateOutputs(p, g, xa, xb)
+
+
+# def main():
+#     print(is_primitive_root(1, 6))
+
+# main()
+
+>>>>>>> Stashed changes

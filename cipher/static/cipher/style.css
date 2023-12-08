@@ -117,12 +117,17 @@ body {
 
   /* Main content */
   #main-container { 
-    width: 60%;
-    margin-top: 100px;
+    width: 70%;
+    margin-top: 65px;
+    height: calc(100vh);
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     position: relative;
+
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
   }
 
   /* Font */
