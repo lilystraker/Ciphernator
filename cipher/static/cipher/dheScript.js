@@ -198,7 +198,10 @@ function validate(type) {
             // Display error message
             document.getElementById("not-primitive-root-error").style.display = "block";
             document.getElementById("id_generator").style.borderColor = errorColour;
-            
+            for (var i = 0; i < primitiveRootsList.length; i++) {
+                console.log(primitiveRootsList[i])
+            }
+            console.log(generator.toString());
             // prevent submit
             event.preventDefault();
             isEncryptInvalid = true;

@@ -15,10 +15,7 @@ from .forms import MyForm, sdesEncryptionForm, sdesDecryptionForm, dheForm
 from django.shortcuts import render
 from itertools import permutations
 from .functions.sdesFunctions import generateKey, sdesEncryption, sdesDecipher
-<<<<<<< Updated upstream
-=======
 from .functions.dheFunctions import calculateOutputs, primitive_roots, is_primitive_root
->>>>>>> Stashed changes
 import re
 
 # for deployment
@@ -97,31 +94,6 @@ def cipher(request):
 def dhe(request):
     prime_modulus = ""
     generator = ""
-<<<<<<< Updated upstream
-    form = dheForm()
-
-    if request.method == 'POST':
-        print("post")
-        form = dheForm(request.POST)  # Bind the POST data to the form
-
-        if form.is_valid():
-            print("valid")
-            prime_modulus = form.cleaned_data['prime_modulus']
-            generator = form.cleaned_data['generator']
-            xa = form.cleaned_data['xa']
-            xb = form.cleaned_data['xb']
-            print(request.POST)  # Add this line
-
-            (ya, yb, k1, k2) = calculateOutputs(int(prime_modulus), int(generator), int(xa), int(xb)) 
-        else:
-            print("invalid")
-            print(form.errors)
-    else:
-        print("request.method was not POST")
-    return render(request, 'dhe.html', {
-        'dhe_form': form,
-        'primitive_root' : primitive_root, 'generator' : generator,
-=======
     xa = ""
     xb = ""
     ya = ""
@@ -141,7 +113,7 @@ def dhe(request):
             generator = form.cleaned_data['generator']
             xa = form.cleaned_data['xa']
             xb = form.cleaned_data['xb']
-            print(request.POST)  # Add this line
+            print(request.POST) 
 
             # check whether generator is a primitive root of prime modulus
             if is_primitive_root(int(generator), int(prime_modulus)):
@@ -162,7 +134,6 @@ def dhe(request):
         'dhe_form': form,
         'prime_modulus' : prime_modulus, 'generator' : generator, 'xa' : xa, 'xb' : xb, 'ya': ya, 'yb': yb, 'k1': k1, 
         'primitive_roots_list': primitive_roots_list,
->>>>>>> Stashed changes
     })
 
 def contact(request):

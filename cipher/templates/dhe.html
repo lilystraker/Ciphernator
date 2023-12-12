@@ -54,6 +54,7 @@
                 
           
             <!-- <p>Please enter a 10-bit key and 8-bit plaintext to begin</p> -->
+            <p id = "primitive_roots_list">{{ primitive_roots_list }}</p>
 
 
             <div class="tab">
@@ -99,9 +100,6 @@
                         <div class = "col-sm-3 field">
                             {{ dhe_form.generator }}
                         </div>
-<<<<<<< Updated upstream
-                            <div id = "key-error"  class = "error-message">Please enter a ____</div>
-=======
                             <div id = "generator-error"  class = "error-message"><p>Please enter a valid integer</p></div>
                             <div id = "not-primitive-root-error"  class = "error-message"><p>That is not a valid primitive root of the prime modulus.
                            Below is a list of all valid primitive roots:
@@ -119,7 +117,16 @@
                             {{ dhe_form.xa }}
                         </div>
                             <div id = "xa-error"  class = "error-message">Please enter a valid integer</div>
->>>>>>> Stashed changes
+                    </div>
+
+                    <div class="row field">
+                        <div class = "col-sm-3 lbl">
+                            <label for="{{ dhe_form.xb.id_for_label }}">User B's Private Number</label>
+                        </div>
+                        <div class = "col-sm-3 field">
+                            {{ dhe_form.xb }}
+                        </div>
+                            <div id = "xb-error"  class = "error-message">Please enter a valid integer</div>
                     </div>
 
                 </div>
@@ -169,7 +176,6 @@
                 <p>decryption</p>
                 {% endif %}
             </div>
-            <p id = "primitive_roots_list">{{ primitive_roots_list }}</p>
 
             <!-- My JS -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
