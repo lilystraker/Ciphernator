@@ -15,7 +15,10 @@ from .forms import MyForm, sdesEncryptionForm, sdesDecryptionForm, dheForm
 from django.shortcuts import render
 from itertools import permutations
 from .functions.sdesFunctions import generateKey, sdesEncryption, sdesDecipher
-from .functions.dheFunctions import calculateOutputs
+<<<<<<< Updated upstream
+=======
+from .functions.dheFunctions import calculateOutputs, primitive_roots, is_primitive_root
+>>>>>>> Stashed changes
 import re
 
 # for deployment
@@ -94,12 +97,7 @@ def cipher(request):
 def dhe(request):
     prime_modulus = ""
     generator = ""
-    xa = ""
-    xb = ""
-    ya = ""
-    yb = ""
-    k1 = ""
-    k2 = ""
+<<<<<<< Updated upstream
     form = dheForm()
 
     if request.method == 'POST':
@@ -122,7 +120,49 @@ def dhe(request):
         print("request.method was not POST")
     return render(request, 'dhe.html', {
         'dhe_form': form,
-        'prime_modulus' : prime_modulus, 'generator' : generator, 'xa' : xa, 'xb' : xb, 'ya': ya, 'yb': yb, 'k1': k1
+        'primitive_root' : primitive_root, 'generator' : generator,
+=======
+    xa = ""
+    xb = ""
+    ya = ""
+    yb = ""
+    k1 = ""
+    k2 = ""
+    primitive_roots_list = []
+    form = dheForm()
+
+    if request.method == 'POST':
+        print("post")
+        form = dheForm(request.POST)  # Bind the POST data to the form
+
+        if form.is_valid():
+            print("valid")
+            prime_modulus = form.cleaned_data['prime_modulus']
+            generator = form.cleaned_data['generator']
+            xa = form.cleaned_data['xa']
+            xb = form.cleaned_data['xb']
+            print(request.POST)  # Add this line
+
+            # check whether generator is a primitive root of prime modulus
+            if is_primitive_root(int(generator), int(prime_modulus)):
+                print("generator valid")
+
+                (ya, yb, k1, k2) = calculateOutputs(int(prime_modulus), int(generator), int(xa), int(xb)) 
+            else:
+                print("generator INvalid")
+                print("generator: ", generator)
+                # if not, generate a list of all valid primitive roots
+                primitive_roots_list = primitive_roots(int(prime_modulus))
+        else:
+            print("Form is invalid")
+            print(form.errors)
+    else:
+        print("request.method was not POST")
+    return render(request, 'dhe.html', {
+        'dhe_form': form,
+        'prime_modulus' : prime_modulus, 'generator' : generator, 'xa' : xa, 'xb' : xb, 'ya': ya, 'yb': yb, 'k1': k1, 
+        'primitive_roots_list': primitive_roots_list,
+>>>>>>> Stashed changes
     })
 
 def contact(request):

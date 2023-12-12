@@ -17,6 +17,7 @@ var resultsContainer = document.getElementById('results-container')
 encryptionForm = document.getElementById("encryption-form-placeholder")
 resultsTable = document.getElementById("results-table")
 
+var primitiveRootsList = document.getElementById("primitive_roots_list").innerText;
 
 // Following code is used to get my CSS variables
 // Get the root element
@@ -27,7 +28,6 @@ var css = getComputedStyle(root);
 // Get the value of the CSS colour variables
 var encryptColor = css.getPropertyValue('--encrypt');
 // var decryptColor = css.getPropertyValue('--decrypt');
-
 
 document.addEventListener("DOMContentLoaded", function() {
     resultsContainer.style.display  = 'block'; 
@@ -165,7 +165,8 @@ function validate(type) {
         var xb = document.getElementById('id_xb').value;
         var errorColour = css.getPropertyValue('--error');
 
-    
+
+
         this.action += '?form=encryption';
     
         // Check the inputs are valid
@@ -192,12 +193,24 @@ function validate(type) {
             event.preventDefault();
             isEncryptInvalid = true;
         }
+        // check if generator is a primitive root of prime modulus
+        else if (!primitiveRootsList.includes(generator.toString())) {
+            // Display error message
+            document.getElementById("not-primitive-root-error").style.display = "block";
+            document.getElementById("id_generator").style.borderColor = errorColour;
+            
+            // prevent submit
+            event.preventDefault();
+            isEncryptInvalid = true;
+        }
         else {
+            document.getElementById("not-primitive-root-error").style.display = "none";
             document.getElementById("generator-error").style.display = "none";
             document.getElementById("id_generator").style.borderColor = encryptColor;
 
         }
     
+        
         if (!isInteger(xa, 1, 10)) {
             // Display error message
             document.getElementById("xa-error").style.display = "block";

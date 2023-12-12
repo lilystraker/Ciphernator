@@ -7,8 +7,11 @@ import math
 def is_primitive_root(g, n):
     """ Find out if g is a primitive root of n """
 
-    # If the greatest common denominator between g and n is NOT 1, then g is not a primtive root 
+    # If the greatest common denominator between g and n is NOT 1, then g is not a primitive root 
     if gcd(g, n) != 1:
+        return False
+    
+    if g > n:
         return False
     
     # Euler's totient function for n
