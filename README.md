@@ -36,10 +36,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 ### Built With
 
   ![Python Badge](https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python)
