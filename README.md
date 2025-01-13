@@ -9,7 +9,7 @@
 <img src = "https://github.com/lilystraker/Ciphernator/blob/54a21020625bd1620f15de49324871511d08fe6c/cipher/static/images/ciphernatorTitle.png" alt = "Ciphernator logo">
 
   <p align="center">
-    <a href="http://www.ciphernator.live/">View Website</a>
+    <a href="http://ciphernator.tech/">View Website</a>
   </p>
 </div>
 
