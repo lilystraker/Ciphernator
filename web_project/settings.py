@@ -25,10 +25,11 @@ SECRET_KEY = 'django-insecure-j3=85199b@fj+0hvo7@s&n&m2%x3_w!46vpu+q3ul*p7_+#p8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ciphernator-ff3eb33a84d8.herokuapp.com', 'ciphernator-ff3eb33a84d8.herokuapp.com', "ciphernator.tech", "www.ciphernator.tech", "127.0.0.1"]
-# ,
-# ['www.ciphernator.live', 'www.ciphernator.live']
+ALLOWED_HOSTS = ['https://ciphernator.onrender.com', 'ciphernator.onrender.com', "ciphernator.work", "www.ciphernator.work", "127.0.0.1"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://ciphernator.work", "http://ciphernator.work", 'https://ciphernator.onrender.com'
+]
 
 # Application definition
 
